@@ -14381,3 +14381,58 @@ Started POST "/trails" for ::1 at 2016-01-23 14:57:48 -0800
 Processing by TrailsController#create as */*
   Parameters: {"id"=>"10033941", "name"=>"Estes Cone", "slug"=>"us/colorado/estes-cone", "overview"=>"Estes Cone is a 6.2 mile out and back trail located near Estes Park, CO that offers the chance to see wildlife and is rated as moderate. The trail is primarily used for hiking and is accessible from May until November.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"13.8647", "location"=>{"postalCode"=>"", "city"=>"Estes Park", "region"=>"CO", "country"=>"US", "latitude"=>"40.2713962", "longitude"=>"-105.5564733"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.4", "difficulty"=>"3", "duration"=>"10800", "visitorUsage"=>"2", "seasonStart"=>"5", "seasonEnd"=>"11"}, "trailGeoStats"=>{"length"=>"9929.6278", "elevationStart"=>"2860.8528", "elevationGain"=>"562.9656", "elevationMax"=>"3354.9336"}, "defaultPhoto"=>{"id"=>"10215580", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10033941", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10084342", "private"=>"", "username"=>"putmeontherock", "firstName"=>"Cody", "lastName"=>"Martin", "slug"=>"putmeontherock", "reputation"=>"80", "reviews"=>"1", "completed"=>"0", "following"=>"0", "followers"=>"0", "tracks"=>"0", "maps"=>"0", "photos"=>"1", "lists"=>"0", "location"=>{"postalCode"=>"38820", "city"=>"Algoma", "region"=>"MS", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-05-31T18:40:53Z", "updated"=>"2012-08-29T15:12:24Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"16", "completedCount"=>"126", "trackCount"=>"12"}, "metadata"=>{"created"=>"2015-10-18T00:00:55Z", "updated"=>"2016-01-21T00:33:05Z", "status"=>"A"}}
 Completed 200 OK in 7ms (Views: 1.5ms | ActiveRecord: 0.0ms)
+  [1m[36m (14.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (10.0ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20160123213630)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (15.4ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "weight" integer, "pace" decimal(3,1), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160123213630"]]
+  [1m[36m (12.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateTrails (20160123213634)
+  [1m[35m (6.3ms)[0m  BEGIN
+  [1m[36m (4.2ms)[0m  [1mCREATE TABLE "trails" ("id" serial primary key, "name" character varying, "length" decimal(10,2), "elevation_gain" decimal(10,2), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160123213634"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateHikes (20160123214122)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "hikes" ("id" serial primary key, "user_id" integer, "trail_id" integer, "calories_burned" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160123214122"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (2.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'hikes'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'trails'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.5ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m

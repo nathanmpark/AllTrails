@@ -26,9 +26,10 @@ ActiveRecord::Schema.define(version: 20160123214122) do
 
   create_table "trails", force: :cascade do |t|
     t.string   "name"
-    t.decimal  "distance",   precision: 7, scale: 1
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.decimal  "length",         precision: 10, scale: 2
+    t.decimal  "elevation_gain", precision: 10, scale: 2
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   create_table "users", force: :cascade do |t|
