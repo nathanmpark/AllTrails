@@ -121,3 +121,219 @@ Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde45
 
 
 Started GET "/assets/application.self-377610cd7c1509e934744c810e3b4cf672dfbcacac3274e7d039827e2ae0fcc7.js?body=1" for ::1 at 2016-01-23 14:02:47 -0800
+
+
+Started GET "/" for ::1 at 2016-01-23 14:25:12 -0800
+Processing by TrailsController#index as HTML
+  Rendered trails/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 76ms (Views: 76.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:25:12 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 14:25:12 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:25:12 -0800
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:25:12 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 14:25:12 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 14:25:12 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:25:12 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:25:12 -0800
+
+
+Started GET "/assets/application.self-b1589125d254b2525cf78e8d608f3ca14b67d9c5fb67fcc39d90d0a2be8cb176.js?body=1" for ::1 at 2016-01-23 14:25:12 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:25:12 -0800
+
+
+Started GET "/" for ::1 at 2016-01-23 14:25:42 -0800
+Processing by TrailsController#index as HTML
+  Rendered trails/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 86ms (Views: 85.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:25:42 -0800
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:25:42 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:25:42 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 14:25:42 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 14:25:42 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 14:25:42 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:25:42 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:25:42 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:25:42 -0800
+
+
+Started GET "/assets/application.self-f0954d4f981bb75143df46985c41f7d94cc99d7dd2fd17e8e475421a05493f0d.js?body=1" for ::1 at 2016-01-23 14:25:42 -0800
+
+
+Started GET "/" for ::1 at 2016-01-23 14:26:37 -0800
+Processing by TrailsController#index as HTML
+  Rendered trails/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 82ms (Views: 81.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:26:37 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:26:37 -0800
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:26:37 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 14:26:37 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:26:37 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 14:26:37 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 14:26:37 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:26:37 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:26:37 -0800
+
+
+Started GET "/assets/application.self-81df5e63aa69c8ab5a65222c337fea804056b5bffac93530c190379eba5bf57e.js?body=1" for ::1 at 2016-01-23 14:26:37 -0800
+
+
+Started GET "/" for ::1 at 2016-01-23 14:26:58 -0800
+Processing by TrailsController#index as HTML
+  Rendered trails/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 66ms (Views: 66.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:26:58 -0800
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:26:58 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:26:58 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 14:26:58 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 14:26:58 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 14:26:58 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:26:59 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:26:59 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:26:59 -0800
+
+
+Started GET "/assets/application.self-7c27a0f9a5852dd394a1884a5421e74da1610f36cddfef0edd7a16570daa4d01.js?body=1" for ::1 at 2016-01-23 14:26:59 -0800
+
+
+Started GET "/" for ::1 at 2016-01-23 14:27:25 -0800
+Processing by TrailsController#index as HTML
+  Rendered trails/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 66ms (Views: 66.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:27:25 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:27:25 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 14:27:25 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 14:27:25 -0800
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:27:25 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 14:27:25 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:27:25 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:27:25 -0800
+
+
+Started GET "/assets/application.self-11b736cc52328b785af4bdb950a98e2429902100b61f3763f00bc68e5b8df2d3.js?body=1" for ::1 at 2016-01-23 14:27:25 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:27:25 -0800
+
+
+Started GET "/" for ::1 at 2016-01-23 14:27:44 -0800
+Processing by TrailsController#index as HTML
+  Rendered trails/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 66ms (Views: 66.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:27:44 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:27:44 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 14:27:44 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 14:27:44 -0800
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 14:27:44 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 14:27:44 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:27:44 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:27:44 -0800
+
+
+Started GET "/assets/application.self-0561f4b1897b741a74734e61a9a72541a8f333f021c8a6af902b8a70ec03cf63.js?body=1" for ::1 at 2016-01-23 14:27:44 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 14:27:44 -0800

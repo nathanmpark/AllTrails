@@ -4,4 +4,7 @@ class TrailsController < ApplicationController
 
   end
   
+  def create
+
+  end
 end
