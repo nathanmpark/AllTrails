@@ -28,7 +28,7 @@ var loadTrails = function(){
       })
       .done(function(response){
         console.log(response)
-
+        trailData(response)
       })
       .fail(function(error){
         console.log(error)
@@ -43,7 +43,12 @@ var getTrails = function(trail_id){
 var trailData = function(trail_obj){
   $.ajax({
     type: 'POST',
-    url: '/trails'
+    url: '/trails',
+    data: trail_obj,
+    dataType: 'JSON'
+  })
+  .done(function(response){
+    console.log('HELLO YOU MADE IT BACK')
   })
 };
 

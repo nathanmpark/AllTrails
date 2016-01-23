@@ -5,6 +5,6 @@ class TrailsController < ApplicationController
   end
   
   def create
-
+    p params
   end
 end
