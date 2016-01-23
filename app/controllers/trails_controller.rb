@@ -8,15 +8,20 @@ class TrailsController < ApplicationController
   def create
     name = params[:name]
     length = params[:trailGeoStats][:length]
-    elevation_gain = params[:trailGeoStats][:elevation_gain]
+    elevation_gain = params[:trailGeoStats][:elevationGain]
     trail = Trail.find_or_initialize_by(name: name, length: length, elevation_gain: elevation_gain)
+    
+    p trail.new_record?
     
     if trail.new_record?
       trail.save
+      p 'YOU ARE HERE'
       render nothing: true
     elsif trail.persisted?
+      p 'elsif part'
       render nothing: true
     else
+      p 'else statement'
       render status: 401
     end
   end

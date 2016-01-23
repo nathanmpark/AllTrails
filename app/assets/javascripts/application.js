@@ -16,8 +16,6 @@
 
 
 $(document).ready(function(){
-  loadTrails()
-
 });
 
 var loadTrails = function(){
@@ -27,7 +25,6 @@ var loadTrails = function(){
         url: getTrails(trail_id)
       })
       .done(function(response){
-        console.log(response)
         trailData(response['trails'][0])
       })
       .fail(function(error){
@@ -50,8 +47,12 @@ var trailData = function(trail_obj){
   .done(function(response){
     console.log(response)
   })
+  .fail(function(error){
+    console.log(error)
+  })
 };
 
+loadTrails();
 
 
 
