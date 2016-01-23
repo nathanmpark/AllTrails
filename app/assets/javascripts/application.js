@@ -28,7 +28,7 @@ var loadTrails = function(){
       })
       .done(function(response){
         console.log(response)
-        trailData(response)
+        trailData(response['trails'][0])
       })
       .fail(function(error){
         console.log(error)
@@ -48,7 +48,7 @@ var trailData = function(trail_obj){
     dataType: 'JSON'
   })
   .done(function(response){
-    console.log('HELLO YOU MADE IT BACK')
+    console.log(response)
   })
 };
 
