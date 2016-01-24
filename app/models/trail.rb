@@ -38,7 +38,7 @@ class Trail < ActiveRecord::Base
 
     diff = (((((elev_gain/(dist*5280)*100)*4)+(Math.sqrt((dist*dist)*6))))/2.5);
     
-    calories = ((((weight * 2462.4)+44044)/(pace**1.0045))+(Math.sqrt(((diff^3)))));
+    calories = ((((weight * 2462.4)+44044)/(pace**1.0045))+(Math.sqrt(((diff**3)))));
 
     return calories
   end  
