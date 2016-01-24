@@ -1,6 +1,7 @@
 <%if flash[:error]%>
   <%=flash[:error]%>
 <%else%>
+  <div id='trail'>Trail Distance: <%=distance%> meters</div>
   <div id='calories'>Total Calories Burned: <%=calories%></div>
   <div id='hike-time'>Total Hiking Time: <%=time[:hours]%>:<%=time[:min]%>:<%=time[:sec]%></div>
 <%end%>
