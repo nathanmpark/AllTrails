@@ -29,15 +29,6 @@ class Trail < ActiveRecord::Base
     dist = dist.to_f*0.000621371 #converts dist from meters to miles
     elev_gain = elev_gain.to_f*3.28084
 
-    p 'weight' * 90
-    p weight
-    p 'pace' * 90
-    p pace
-    p 'dist' * 90
-    p dist
-    p 'elev_gain' * 90
-    p elev_gain
-
     diff = ((((elev_gain/(dist*5280)*100)*4)+(Math.sqrt((dist*dist)*6)))/2.5);
     
     calories = ((((weight * 2462.4)+44044)/(pace**1.0045))+(Math.sqrt(((diff**3)))));
