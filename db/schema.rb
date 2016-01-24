@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160123214122) do
 
   create_table "trails", force: :cascade do |t|
     t.string   "name"
-    t.decimal  "length",         precision: 10, scale: 4
+    t.decimal  "distance",       precision: 10, scale: 4
     t.decimal  "elevation_gain", precision: 10, scale: 4
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false

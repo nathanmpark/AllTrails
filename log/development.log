@@ -21381,3 +21381,880 @@ TypeError (no implicit conversion of Fixnum into String):
   Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
   Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
   Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (112.1ms)
+  [1m[36m (20.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (3.6ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20160123213630)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (25.3ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "weight" integer, "pace" decimal(3,1), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160123213630"]]
+  [1m[36m (6.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateTrails (20160123213634)
+  [1m[35m (6.3ms)[0m  BEGIN
+  [1m[36m (9.6ms)[0m  [1mCREATE TABLE "trails" ("id" serial primary key, "name" character varying, "distance" decimal(10,4), "elevation_gain" decimal(10,4), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160123213634"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateHikes (20160123214122)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.1ms)[0m  [1mCREATE TABLE "hikes" ("id" serial primary key, "user_id" integer, "trail_id" integer, "calories_burned" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160123214122"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (1.9ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'hikes'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.4ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'trails'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.4ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+
+
+Started GET "/" for ::1 at 2016-01-23 19:42:44 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TrailsController#index as HTML
+  [1m[35mTrail Load (0.4ms)[0m  SELECT "trails".* FROM "trails"
+  Rendered trails/index.html.erb within layouts/application (15.4ms)
+Completed 200 OK in 301ms (Views: 294.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:42:44 -0800
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:42:44 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:42:44 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 19:42:44 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 19:42:44 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 19:42:44 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:42:44 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:42:44 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:42:44 -0800
+
+
+Started GET "/assets/application.self-d41f5c3e6d50e46186b864114fe1b1768d3a735efca845e666fa38cefa1c5103.js?body=1" for ::1 at 2016-01-23 19:42:44 -0800
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:42:45 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10029035", "name"=>"Tennessee Valley Trail", "slug"=>"us/california/tennessee-valley-trail", "overview"=>"Tennessee Valley Trail is a 3.4 mile out and back trail located near Sausalito, CA that features beautiful wild flowers. The trail is good for all skill levels  offers a number of activity options. Horses are also able to use this trail.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"22.1058", "location"=>{"postalCode"=>"", "city"=>"Sausalito", "region"=>"CA", "country"=>"US", "latitude"=>"37.8603413", "longitude"=>"-122.5363803"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Mountain Biking", "uid"=>"mountain-biking", "bitfieldPosition"=>"9", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "6"=>{"description"=>"", "name"=>"Horseback Riding", "uid"=>"horseback-riding", "bitfieldPosition"=>"23", "type"=>"activity"}, "7"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Beach", "uid"=>"beach", "bitfieldPosition"=>"1", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Kids", "uid"=>"kids", "bitfieldPosition"=>"7", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Wild Flowers", "uid"=>"wild-flowers", "bitfieldPosition"=>"12", "type"=>"trail-feature"}, "4"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.3", "difficulty"=>"1", "duration"=>"", "visitorUsage"=>"2", "seasonStart"=>"", "seasonEnd"=>""}, "trailGeoStats"=>{"length"=>"5487.8494", "elevationStart"=>"58.8264", "elevationGain"=>"39.9288", "elevationMax"=>"58.8264"}, "defaultPhoto"=>{"id"=>"10250828", "title"=>"", "description"=>"", "likeCount"=>"3", "trailId"=>"10029035", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10146215", "private"=>"true", "username"=>"Khowell23", "firstName"=>"Kate", "lastName"=>"H.", "reputation"=>"824", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "tracks"=>"", "maps"=>"", "photos"=>"", "lists"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"", "subscription"=>"", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-12-31T16:07:11Z", "updated"=>"2014-05-10T21:24:44Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"19", "completedCount"=>"278", "trackCount"=>"38"}, "metadata"=>{"created"=>"2015-10-13T18:00:11Z", "updated"=>"2016-01-21T00:41:00Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.3ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Tennessee Valley Trail"], ["distance", "5487.8494"], ["elevation_gain", "39.9288"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "trails" ("name", "distance", "elevation_gain", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Tennessee Valley Trail"], ["distance", "5487.8494"], ["elevation_gain", "39.9288"], ["created_at", "2016-01-24 03:42:45.522983"], ["updated_at", "2016-01-24 03:42:45.522983"]]
+  [1m[35m (4.7ms)[0m  COMMIT
+  Rendered text template (0.0ms)
+Completed 200 OK in 48ms (Views: 1.8ms | ActiveRecord: 7.6ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:42:45 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10207801", "name"=>"Cataract Falls Trail", "slug"=>"us/california/cataract-falls-trail", "overview"=>"Cataract Falls Trail is a 2.9 mile out and back trail that explores the stunning waterfalls that flow into Alpine Lake. The offers birding, hiking, trail running & walking. The falls flow the best after a recent rain, although the trails can be a bit muddy as well.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"33.335", "location"=>{"postalCode"=>"", "city"=>"Fairfax", "region"=>"CA", "country"=>"US", "latitude"=>"37.9364793", "longitude"=>"-122.6379993"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Forest", "uid"=>"forest", "bitfieldPosition"=>"5", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"River", "uid"=>"river", "bitfieldPosition"=>"9", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Waterfall", "uid"=>"waterfall", "bitfieldPosition"=>"11", "type"=>"trail-feature"}}, "obstacles"=>{"0"=>{"description"=>"", "name"=>"Scramble", "uid"=>"scramble", "bitfieldPosition"=>"", "type"=>"trail-obstacle"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.5", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"1", "seasonStart"=>"12", "seasonEnd"=>"5"}, "trailGeoStats"=>{"length"=>"4345.218", "elevationStart"=>"136.8552", "elevationGain"=>"320.04", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10475809", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10207801", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"37.9325", "longitude"=>"-122.6366667"}, "user"=>{"id"=>"11101982", "private"=>"false", "username"=>"niall", "firstName"=>"Niall", "lastName"=>"Kennedy", "slug"=>"niall", "reputation"=>"230", "reviews"=>"0", "completed"=>"1", "following"=>"1", "followers"=>"0", "tracks"=>"65", "maps"=>"0", "photos"=>"80", "lists"=>"0", "activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}}, "location"=>{"postalCode"=>"94103", "city"=>"San Francisco", "region"=>"CA", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>{"id"=>"10475684", "title"=>"", "description"=>"", "trailId"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "metadata"=>{"created"=>"2012-11-11T16:35:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}}, "metadata"=>{"created"=>"2012-11-11T17:26:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"70", "completedCount"=>"389", "trackCount"=>"46"}, "metadata"=>{"created"=>"2015-09-12T22:00:12Z", "updated"=>"2016-01-20T18:23:21Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.3ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Cataract Falls Trail"], ["distance", "4345.218"], ["elevation_gain", "320.04"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "trails" ("name", "distance", "elevation_gain", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Cataract Falls Trail"], ["distance", "4345.218"], ["elevation_gain", "320.04"], ["created_at", "2016-01-24 03:42:45.566220"], ["updated_at", "2016-01-24 03:42:45.566220"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  Rendered text template (0.0ms)
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:42:45 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10035772", "name"=>"Runyon Canyon Trail", "slug"=>"us/california/runyon-canyon-trail", "overview"=>"Runyon Canyon Trail is a 3.5 mile loop trail located near Los Angeles, California that offers scenic views and is rated as moderate. The trail is primarily used for hiking & trail running and is accessible from September until May. Dogs are also able to use this trail but must be kept on leash.", "routeType"=>{"uid"=>"L", "name"=>"Loop"}, "popularity"=>"61.1954", "location"=>{"postalCode"=>"", "city"=>"Los Angeles", "region"=>"CA", "country"=>"US", "latitude"=>"34.1052612", "longitude"=>"-118.3489934"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Dogs Leash", "uid"=>"dogs-leash", "bitfieldPosition"=>"4", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"3.9", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"4", "seasonStart"=>"1", "seasonEnd"=>"12"}, "trailGeoStats"=>{"length"=>"5632.69", "elevationStart"=>"", "elevationGain"=>"213.36", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10291896", "title"=>"The Griffith Observatory from the first bend in Runyon Canyon trail", "description"=>"", "likeCount"=>"2", "trailId"=>"10035772", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"34.107256", "longitude"=>"-118.350305"}, "user"=>{"id"=>"", "private"=>"", "username"=>"DaveAtkinson", "firstName"=>"", "lastName"=>"", "reputation"=>"", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "maps"=>"", "photos"=>"", "location"=>{"city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2012-04-25T16:36:32Z", "updated"=>"2012-04-25T16:36:32Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"295", "completedCount"=>"2271", "trackCount"=>"265"}, "metadata"=>{"created"=>"2015-08-08T06:00:01Z", "updated"=>"2016-01-20T22:14:11Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.3ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Runyon Canyon Trail"], ["distance", "5632.69"], ["elevation_gain", "213.36"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "trails" ("name", "distance", "elevation_gain", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Runyon Canyon Trail"], ["distance", "5632.69"], ["elevation_gain", "213.36"], ["created_at", "2016-01-24 03:42:45.584149"], ["updated_at", "2016-01-24 03:42:45.584149"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  Rendered text template (0.0ms)
+Completed 200 OK in 6ms (Views: 0.7ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:42:45 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10034022", "name"=>"Granite Mountain Trail", "slug"=>"us/california/granite-mountain-trail", "overview"=>"Granite Mountain Trail is a 6.5 mile out and back trail located near Julian, California and is only recommended for very experienced outdoorsmen. The trail is primarily used for hiking and is accessible from November until April.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"3.0054", "location"=>{"postalCode"=>"", "city"=>"Julian", "region"=>"CA", "country"=>"US", "latitude"=>"33.0641412", "longitude"=>"-116.4418613"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"0", "difficulty"=>"7", "duration"=>"25200", "visitorUsage"=>"", "seasonStart"=>"11", "seasonEnd"=>"4"}, "trailGeoStats"=>{"length"=>"10460.71", "elevationStart"=>"", "elevationGain"=>"975.36", "elevationMax"=>""}, "defaultPhoto"=>"", "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"1", "completedCount"=>"6", "trackCount"=>"1"}, "metadata"=>{"created"=>"2009-12-11T20:12:51Z", "updated"=>"2015-12-18T07:45:12Z", "status"=>"A"}}
+  [1m[36mTrail Load (1.0ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Granite Mountain Trail"], ["distance", "10460.71"], ["elevation_gain", "975.36"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "trails" ("name", "distance", "elevation_gain", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Granite Mountain Trail"], ["distance", "10460.71"], ["elevation_gain", "975.36"], ["created_at", "2016-01-24 03:42:45.606332"], ["updated_at", "2016-01-24 03:42:45.606332"]]
+  [1m[35m (1.2ms)[0m  COMMIT
+  Rendered text template (0.0ms)
+Completed 200 OK in 10ms (Views: 0.5ms | ActiveRecord: 2.8ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:42:45 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10033941", "name"=>"Estes Cone", "slug"=>"us/colorado/estes-cone", "overview"=>"Estes Cone is a 6.2 mile out and back trail located near Estes Park, CO that offers the chance to see wildlife and is rated as moderate. The trail is primarily used for hiking and is accessible from May until November.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"13.8647", "location"=>{"postalCode"=>"", "city"=>"Estes Park", "region"=>"CO", "country"=>"US", "latitude"=>"40.2713962", "longitude"=>"-105.5564733"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.4", "difficulty"=>"3", "duration"=>"10800", "visitorUsage"=>"2", "seasonStart"=>"5", "seasonEnd"=>"11"}, "trailGeoStats"=>{"length"=>"9929.6278", "elevationStart"=>"2860.8528", "elevationGain"=>"562.9656", "elevationMax"=>"3354.9336"}, "defaultPhoto"=>{"id"=>"10215580", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10033941", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10084342", "private"=>"", "username"=>"putmeontherock", "firstName"=>"Cody", "lastName"=>"Martin", "slug"=>"putmeontherock", "reputation"=>"80", "reviews"=>"1", "completed"=>"0", "following"=>"0", "followers"=>"0", "tracks"=>"0", "maps"=>"0", "photos"=>"1", "lists"=>"0", "location"=>{"postalCode"=>"38820", "city"=>"Algoma", "region"=>"MS", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-05-31T18:40:53Z", "updated"=>"2012-08-29T15:12:24Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"16", "completedCount"=>"126", "trackCount"=>"12"}, "metadata"=>{"created"=>"2015-10-18T00:00:55Z", "updated"=>"2016-01-21T00:33:05Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.3ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Estes Cone"], ["distance", "9929.6278"], ["elevation_gain", "562.9656"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "trails" ("name", "distance", "elevation_gain", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Estes Cone"], ["distance", "9929.6278"], ["elevation_gain", "562.9656"], ["created_at", "2016-01-24 03:42:45.631939"], ["updated_at", "2016-01-24 03:42:45.631939"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  Rendered text template (0.0ms)
+Completed 200 OK in 8ms (Views: 0.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for ::1 at 2016-01-23 19:42:53 -0800
+Processing by TrailsController#index as HTML
+  [1m[36mTrail Load (0.3ms)[0m  [1mSELECT "trails".* FROM "trails"[0m
+  Rendered trails/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 22ms (Views: 21.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:42:53 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:42:53 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 19:42:53 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:42:53 -0800
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:42:53 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 19:42:53 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 19:42:53 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:42:53 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:42:53 -0800
+
+
+Started GET "/assets/application.self-d41f5c3e6d50e46186b864114fe1b1768d3a735efca845e666fa38cefa1c5103.js?body=1" for ::1 at 2016-01-23 19:42:54 -0800
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:42:54 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10034022", "name"=>"Granite Mountain Trail", "slug"=>"us/california/granite-mountain-trail", "overview"=>"Granite Mountain Trail is a 6.5 mile out and back trail located near Julian, California and is only recommended for very experienced outdoorsmen. The trail is primarily used for hiking and is accessible from November until April.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"3.0054", "location"=>{"postalCode"=>"", "city"=>"Julian", "region"=>"CA", "country"=>"US", "latitude"=>"33.0641412", "longitude"=>"-116.4418613"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"0", "difficulty"=>"7", "duration"=>"25200", "visitorUsage"=>"", "seasonStart"=>"11", "seasonEnd"=>"4"}, "trailGeoStats"=>{"length"=>"10460.71", "elevationStart"=>"", "elevationGain"=>"975.36", "elevationMax"=>""}, "defaultPhoto"=>"", "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"1", "completedCount"=>"6", "trackCount"=>"1"}, "metadata"=>{"created"=>"2009-12-11T20:12:51Z", "updated"=>"2015-12-18T07:45:12Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.3ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Granite Mountain Trail"], ["distance", "10460.71"], ["elevation_gain", "975.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:42:54 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10033941", "name"=>"Estes Cone", "slug"=>"us/colorado/estes-cone", "overview"=>"Estes Cone is a 6.2 mile out and back trail located near Estes Park, CO that offers the chance to see wildlife and is rated as moderate. The trail is primarily used for hiking and is accessible from May until November.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"13.8647", "location"=>{"postalCode"=>"", "city"=>"Estes Park", "region"=>"CO", "country"=>"US", "latitude"=>"40.2713962", "longitude"=>"-105.5564733"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.4", "difficulty"=>"3", "duration"=>"10800", "visitorUsage"=>"2", "seasonStart"=>"5", "seasonEnd"=>"11"}, "trailGeoStats"=>{"length"=>"9929.6278", "elevationStart"=>"2860.8528", "elevationGain"=>"562.9656", "elevationMax"=>"3354.9336"}, "defaultPhoto"=>{"id"=>"10215580", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10033941", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10084342", "private"=>"", "username"=>"putmeontherock", "firstName"=>"Cody", "lastName"=>"Martin", "slug"=>"putmeontherock", "reputation"=>"80", "reviews"=>"1", "completed"=>"0", "following"=>"0", "followers"=>"0", "tracks"=>"0", "maps"=>"0", "photos"=>"1", "lists"=>"0", "location"=>{"postalCode"=>"38820", "city"=>"Algoma", "region"=>"MS", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-05-31T18:40:53Z", "updated"=>"2012-08-29T15:12:24Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"16", "completedCount"=>"126", "trackCount"=>"12"}, "metadata"=>{"created"=>"2015-10-18T00:00:55Z", "updated"=>"2016-01-21T00:33:05Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Estes Cone"], ["distance", "9929.6278"], ["elevation_gain", "562.9656"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:42:54 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10207801", "name"=>"Cataract Falls Trail", "slug"=>"us/california/cataract-falls-trail", "overview"=>"Cataract Falls Trail is a 2.9 mile out and back trail that explores the stunning waterfalls that flow into Alpine Lake. The offers birding, hiking, trail running & walking. The falls flow the best after a recent rain, although the trails can be a bit muddy as well.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"33.335", "location"=>{"postalCode"=>"", "city"=>"Fairfax", "region"=>"CA", "country"=>"US", "latitude"=>"37.9364793", "longitude"=>"-122.6379993"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Forest", "uid"=>"forest", "bitfieldPosition"=>"5", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"River", "uid"=>"river", "bitfieldPosition"=>"9", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Waterfall", "uid"=>"waterfall", "bitfieldPosition"=>"11", "type"=>"trail-feature"}}, "obstacles"=>{"0"=>{"description"=>"", "name"=>"Scramble", "uid"=>"scramble", "bitfieldPosition"=>"", "type"=>"trail-obstacle"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.5", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"1", "seasonStart"=>"12", "seasonEnd"=>"5"}, "trailGeoStats"=>{"length"=>"4345.218", "elevationStart"=>"136.8552", "elevationGain"=>"320.04", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10475809", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10207801", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"37.9325", "longitude"=>"-122.6366667"}, "user"=>{"id"=>"11101982", "private"=>"false", "username"=>"niall", "firstName"=>"Niall", "lastName"=>"Kennedy", "slug"=>"niall", "reputation"=>"230", "reviews"=>"0", "completed"=>"1", "following"=>"1", "followers"=>"0", "tracks"=>"65", "maps"=>"0", "photos"=>"80", "lists"=>"0", "activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}}, "location"=>{"postalCode"=>"94103", "city"=>"San Francisco", "region"=>"CA", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>{"id"=>"10475684", "title"=>"", "description"=>"", "trailId"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "metadata"=>{"created"=>"2012-11-11T16:35:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}}, "metadata"=>{"created"=>"2012-11-11T17:26:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"70", "completedCount"=>"389", "trackCount"=>"46"}, "metadata"=>{"created"=>"2015-09-12T22:00:12Z", "updated"=>"2016-01-20T18:23:21Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Cataract Falls Trail"], ["distance", "4345.218"], ["elevation_gain", "320.04"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:42:54 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10029035", "name"=>"Tennessee Valley Trail", "slug"=>"us/california/tennessee-valley-trail", "overview"=>"Tennessee Valley Trail is a 3.4 mile out and back trail located near Sausalito, CA that features beautiful wild flowers. The trail is good for all skill levels  offers a number of activity options. Horses are also able to use this trail.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"22.1058", "location"=>{"postalCode"=>"", "city"=>"Sausalito", "region"=>"CA", "country"=>"US", "latitude"=>"37.8603413", "longitude"=>"-122.5363803"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Mountain Biking", "uid"=>"mountain-biking", "bitfieldPosition"=>"9", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "6"=>{"description"=>"", "name"=>"Horseback Riding", "uid"=>"horseback-riding", "bitfieldPosition"=>"23", "type"=>"activity"}, "7"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Beach", "uid"=>"beach", "bitfieldPosition"=>"1", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Kids", "uid"=>"kids", "bitfieldPosition"=>"7", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Wild Flowers", "uid"=>"wild-flowers", "bitfieldPosition"=>"12", "type"=>"trail-feature"}, "4"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.3", "difficulty"=>"1", "duration"=>"", "visitorUsage"=>"2", "seasonStart"=>"", "seasonEnd"=>""}, "trailGeoStats"=>{"length"=>"5487.8494", "elevationStart"=>"58.8264", "elevationGain"=>"39.9288", "elevationMax"=>"58.8264"}, "defaultPhoto"=>{"id"=>"10250828", "title"=>"", "description"=>"", "likeCount"=>"3", "trailId"=>"10029035", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10146215", "private"=>"true", "username"=>"Khowell23", "firstName"=>"Kate", "lastName"=>"H.", "reputation"=>"824", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "tracks"=>"", "maps"=>"", "photos"=>"", "lists"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"", "subscription"=>"", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-12-31T16:07:11Z", "updated"=>"2014-05-10T21:24:44Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"19", "completedCount"=>"278", "trackCount"=>"38"}, "metadata"=>{"created"=>"2015-10-13T18:00:11Z", "updated"=>"2016-01-21T00:41:00Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.1ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Tennessee Valley Trail"], ["distance", "5487.8494"], ["elevation_gain", "39.9288"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:42:54 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10035772", "name"=>"Runyon Canyon Trail", "slug"=>"us/california/runyon-canyon-trail", "overview"=>"Runyon Canyon Trail is a 3.5 mile loop trail located near Los Angeles, California that offers scenic views and is rated as moderate. The trail is primarily used for hiking & trail running and is accessible from September until May. Dogs are also able to use this trail but must be kept on leash.", "routeType"=>{"uid"=>"L", "name"=>"Loop"}, "popularity"=>"61.1954", "location"=>{"postalCode"=>"", "city"=>"Los Angeles", "region"=>"CA", "country"=>"US", "latitude"=>"34.1052612", "longitude"=>"-118.3489934"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Dogs Leash", "uid"=>"dogs-leash", "bitfieldPosition"=>"4", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"3.9", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"4", "seasonStart"=>"1", "seasonEnd"=>"12"}, "trailGeoStats"=>{"length"=>"5632.69", "elevationStart"=>"", "elevationGain"=>"213.36", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10291896", "title"=>"The Griffith Observatory from the first bend in Runyon Canyon trail", "description"=>"", "likeCount"=>"2", "trailId"=>"10035772", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"34.107256", "longitude"=>"-118.350305"}, "user"=>{"id"=>"", "private"=>"", "username"=>"DaveAtkinson", "firstName"=>"", "lastName"=>"", "reputation"=>"", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "maps"=>"", "photos"=>"", "location"=>{"city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2012-04-25T16:36:32Z", "updated"=>"2012-04-25T16:36:32Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"295", "completedCount"=>"2271", "trackCount"=>"265"}, "metadata"=>{"created"=>"2015-08-08T06:00:01Z", "updated"=>"2016-01-20T22:14:11Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Runyon Canyon Trail"], ["distance", "5632.69"], ["elevation_gain", "213.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/trails?trailName=Tennessee+Valley+Trail&pace=0&weight=0" for ::1 at 2016-01-23 19:42:58 -0800
+Processing by TrailsController#index as */*
+  Parameters: {"trailName"=>"Tennessee Valley Trail", "pace"=>"0", "weight"=>"0"}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 LIMIT 1[0m  [["name", "Tennessee Valley Trail"]]
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.2ms)
+
+TypeError (no implicit conversion of Fixnum into String):
+  app/models/trail.rb:36:in `+'
+  app/models/trail.rb:36:in `calorie_counter'
+  app/controllers/trails_controller.rb:10:in `index'
+
+
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.1ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (1.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (54.1ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (42.6ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (109.9ms)
+
+
+Started GET "/" for ::1 at 2016-01-23 19:44:23 -0800
+Processing by TrailsController#index as HTML
+  [1m[35mTrail Load (0.3ms)[0m  SELECT "trails".* FROM "trails"
+  Rendered trails/index.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 81ms (Views: 76.8ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:44:23 -0800
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:44:23 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:44:23 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 19:44:23 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:44:23 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 19:44:23 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 19:44:23 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:44:23 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:44:23 -0800
+
+
+Started GET "/assets/application.self-6e19cb3a97bc571f29ab0fbd1355776f3b35497a215de38e5515f4caa92c9f13.js?body=1" for ::1 at 2016-01-23 19:44:23 -0800
+
+
+Started GET "/" for ::1 at 2016-01-23 19:44:25 -0800
+Processing by TrailsController#index as HTML
+  [1m[36mTrail Load (0.3ms)[0m  [1mSELECT "trails".* FROM "trails"[0m
+  Rendered trails/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 35ms (Views: 34.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:44:25 -0800
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:44:25 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:44:25 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 19:44:25 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 19:44:25 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 19:44:25 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:44:25 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:44:25 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:44:25 -0800
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:44:26 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10029035", "name"=>"Tennessee Valley Trail", "slug"=>"us/california/tennessee-valley-trail", "overview"=>"Tennessee Valley Trail is a 3.4 mile out and back trail located near Sausalito, CA that features beautiful wild flowers. The trail is good for all skill levels  offers a number of activity options. Horses are also able to use this trail.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"22.1058", "location"=>{"postalCode"=>"", "city"=>"Sausalito", "region"=>"CA", "country"=>"US", "latitude"=>"37.8603413", "longitude"=>"-122.5363803"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Mountain Biking", "uid"=>"mountain-biking", "bitfieldPosition"=>"9", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "6"=>{"description"=>"", "name"=>"Horseback Riding", "uid"=>"horseback-riding", "bitfieldPosition"=>"23", "type"=>"activity"}, "7"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Beach", "uid"=>"beach", "bitfieldPosition"=>"1", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Kids", "uid"=>"kids", "bitfieldPosition"=>"7", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Wild Flowers", "uid"=>"wild-flowers", "bitfieldPosition"=>"12", "type"=>"trail-feature"}, "4"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.3", "difficulty"=>"1", "duration"=>"", "visitorUsage"=>"2", "seasonStart"=>"", "seasonEnd"=>""}, "trailGeoStats"=>{"length"=>"5487.8494", "elevationStart"=>"58.8264", "elevationGain"=>"39.9288", "elevationMax"=>"58.8264"}, "defaultPhoto"=>{"id"=>"10250828", "title"=>"", "description"=>"", "likeCount"=>"3", "trailId"=>"10029035", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10146215", "private"=>"true", "username"=>"Khowell23", "firstName"=>"Kate", "lastName"=>"H.", "reputation"=>"824", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "tracks"=>"", "maps"=>"", "photos"=>"", "lists"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"", "subscription"=>"", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-12-31T16:07:11Z", "updated"=>"2014-05-10T21:24:44Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"19", "completedCount"=>"278", "trackCount"=>"38"}, "metadata"=>{"created"=>"2015-10-13T18:00:11Z", "updated"=>"2016-01-21T00:41:00Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.1ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Tennessee Valley Trail"], ["distance", "5487.8494"], ["elevation_gain", "39.9288"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:44:26 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10035772", "name"=>"Runyon Canyon Trail", "slug"=>"us/california/runyon-canyon-trail", "overview"=>"Runyon Canyon Trail is a 3.5 mile loop trail located near Los Angeles, California that offers scenic views and is rated as moderate. The trail is primarily used for hiking & trail running and is accessible from September until May. Dogs are also able to use this trail but must be kept on leash.", "routeType"=>{"uid"=>"L", "name"=>"Loop"}, "popularity"=>"61.1954", "location"=>{"postalCode"=>"", "city"=>"Los Angeles", "region"=>"CA", "country"=>"US", "latitude"=>"34.1052612", "longitude"=>"-118.3489934"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Dogs Leash", "uid"=>"dogs-leash", "bitfieldPosition"=>"4", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"3.9", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"4", "seasonStart"=>"1", "seasonEnd"=>"12"}, "trailGeoStats"=>{"length"=>"5632.69", "elevationStart"=>"", "elevationGain"=>"213.36", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10291896", "title"=>"The Griffith Observatory from the first bend in Runyon Canyon trail", "description"=>"", "likeCount"=>"2", "trailId"=>"10035772", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"34.107256", "longitude"=>"-118.350305"}, "user"=>{"id"=>"", "private"=>"", "username"=>"DaveAtkinson", "firstName"=>"", "lastName"=>"", "reputation"=>"", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "maps"=>"", "photos"=>"", "location"=>{"city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2012-04-25T16:36:32Z", "updated"=>"2012-04-25T16:36:32Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"295", "completedCount"=>"2271", "trackCount"=>"265"}, "metadata"=>{"created"=>"2015-08-08T06:00:01Z", "updated"=>"2016-01-20T22:14:11Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Runyon Canyon Trail"], ["distance", "5632.69"], ["elevation_gain", "213.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:44:26 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10207801", "name"=>"Cataract Falls Trail", "slug"=>"us/california/cataract-falls-trail", "overview"=>"Cataract Falls Trail is a 2.9 mile out and back trail that explores the stunning waterfalls that flow into Alpine Lake. The offers birding, hiking, trail running & walking. The falls flow the best after a recent rain, although the trails can be a bit muddy as well.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"33.335", "location"=>{"postalCode"=>"", "city"=>"Fairfax", "region"=>"CA", "country"=>"US", "latitude"=>"37.9364793", "longitude"=>"-122.6379993"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Forest", "uid"=>"forest", "bitfieldPosition"=>"5", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"River", "uid"=>"river", "bitfieldPosition"=>"9", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Waterfall", "uid"=>"waterfall", "bitfieldPosition"=>"11", "type"=>"trail-feature"}}, "obstacles"=>{"0"=>{"description"=>"", "name"=>"Scramble", "uid"=>"scramble", "bitfieldPosition"=>"", "type"=>"trail-obstacle"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.5", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"1", "seasonStart"=>"12", "seasonEnd"=>"5"}, "trailGeoStats"=>{"length"=>"4345.218", "elevationStart"=>"136.8552", "elevationGain"=>"320.04", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10475809", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10207801", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"37.9325", "longitude"=>"-122.6366667"}, "user"=>{"id"=>"11101982", "private"=>"false", "username"=>"niall", "firstName"=>"Niall", "lastName"=>"Kennedy", "slug"=>"niall", "reputation"=>"230", "reviews"=>"0", "completed"=>"1", "following"=>"1", "followers"=>"0", "tracks"=>"65", "maps"=>"0", "photos"=>"80", "lists"=>"0", "activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}}, "location"=>{"postalCode"=>"94103", "city"=>"San Francisco", "region"=>"CA", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>{"id"=>"10475684", "title"=>"", "description"=>"", "trailId"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "metadata"=>{"created"=>"2012-11-11T16:35:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}}, "metadata"=>{"created"=>"2012-11-11T17:26:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"70", "completedCount"=>"389", "trackCount"=>"46"}, "metadata"=>{"created"=>"2015-09-12T22:00:12Z", "updated"=>"2016-01-20T18:23:21Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.1ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Cataract Falls Trail"], ["distance", "4345.218"], ["elevation_gain", "320.04"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:44:26 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10034022", "name"=>"Granite Mountain Trail", "slug"=>"us/california/granite-mountain-trail", "overview"=>"Granite Mountain Trail is a 6.5 mile out and back trail located near Julian, California and is only recommended for very experienced outdoorsmen. The trail is primarily used for hiking and is accessible from November until April.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"3.0054", "location"=>{"postalCode"=>"", "city"=>"Julian", "region"=>"CA", "country"=>"US", "latitude"=>"33.0641412", "longitude"=>"-116.4418613"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"0", "difficulty"=>"7", "duration"=>"25200", "visitorUsage"=>"", "seasonStart"=>"11", "seasonEnd"=>"4"}, "trailGeoStats"=>{"length"=>"10460.71", "elevationStart"=>"", "elevationGain"=>"975.36", "elevationMax"=>""}, "defaultPhoto"=>"", "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"1", "completedCount"=>"6", "trackCount"=>"1"}, "metadata"=>{"created"=>"2009-12-11T20:12:51Z", "updated"=>"2015-12-18T07:45:12Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Granite Mountain Trail"], ["distance", "10460.71"], ["elevation_gain", "975.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:44:27 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10033941", "name"=>"Estes Cone", "slug"=>"us/colorado/estes-cone", "overview"=>"Estes Cone is a 6.2 mile out and back trail located near Estes Park, CO that offers the chance to see wildlife and is rated as moderate. The trail is primarily used for hiking and is accessible from May until November.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"13.8647", "location"=>{"postalCode"=>"", "city"=>"Estes Park", "region"=>"CO", "country"=>"US", "latitude"=>"40.2713962", "longitude"=>"-105.5564733"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.4", "difficulty"=>"3", "duration"=>"10800", "visitorUsage"=>"2", "seasonStart"=>"5", "seasonEnd"=>"11"}, "trailGeoStats"=>{"length"=>"9929.6278", "elevationStart"=>"2860.8528", "elevationGain"=>"562.9656", "elevationMax"=>"3354.9336"}, "defaultPhoto"=>{"id"=>"10215580", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10033941", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10084342", "private"=>"", "username"=>"putmeontherock", "firstName"=>"Cody", "lastName"=>"Martin", "slug"=>"putmeontherock", "reputation"=>"80", "reviews"=>"1", "completed"=>"0", "following"=>"0", "followers"=>"0", "tracks"=>"0", "maps"=>"0", "photos"=>"1", "lists"=>"0", "location"=>{"postalCode"=>"38820", "city"=>"Algoma", "region"=>"MS", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-05-31T18:40:53Z", "updated"=>"2012-08-29T15:12:24Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"16", "completedCount"=>"126", "trackCount"=>"12"}, "metadata"=>{"created"=>"2015-10-18T00:00:55Z", "updated"=>"2016-01-21T00:33:05Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.4ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Estes Cone"], ["distance", "9929.6278"], ["elevation_gain", "562.9656"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/trails?trailName=Runyon+Canyon+Trail&pace=4&weight=140" for ::1 at 2016-01-23 19:44:32 -0800
+Processing by TrailsController#index as HTML
+  Parameters: {"trailName"=>"Runyon Canyon Trail", "pace"=>"4", "weight"=>"140"}
+  [1m[36mTrail Load (0.4ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 LIMIT 1[0m  [["name", "Runyon Canyon Trail"]]
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.4ms)
+
+TypeError (no implicit conversion of Fixnum into String):
+  app/models/trail.rb:36:in `+'
+  app/models/trail.rb:36:in `calorie_counter'
+  app/controllers/trails_controller.rb:9:in `index'
+
+
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.7ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (52.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (48.1ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (107.7ms)
+
+
+Started GET "/trails?trailName=Runyon+Canyon+Trail&pace=4&weight=140" for ::1 at 2016-01-23 19:44:33 -0800
+Processing by TrailsController#index as HTML
+  Parameters: {"trailName"=>"Runyon Canyon Trail", "pace"=>"4", "weight"=>"140"}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 LIMIT 1  [["name", "Runyon Canyon Trail"]]
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.2ms)
+
+TypeError (no implicit conversion of Fixnum into String):
+  app/models/trail.rb:36:in `+'
+  app/models/trail.rb:36:in `calorie_counter'
+  app/controllers/trails_controller.rb:9:in `index'
+
+
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.9ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (2.1ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (53.8ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (51.8ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (119.3ms)
+
+
+Started GET "/" for ::1 at 2016-01-23 19:45:26 -0800
+Processing by TrailsController#index as HTML
+  [1m[36mTrail Load (0.3ms)[0m  [1mSELECT "trails".* FROM "trails"[0m
+  Rendered trails/index.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 24ms (Views: 20.5ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:45:26 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 19:45:26 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:45:26 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 19:45:26 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 19:45:26 -0800
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:45:26 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:45:26 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:45:26 -0800
+
+
+Started GET "/assets/application.self-6e19cb3a97bc571f29ab0fbd1355776f3b35497a215de38e5515f4caa92c9f13.js?body=1" for ::1 at 2016-01-23 19:45:26 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:45:26 -0800
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:45:29 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10034022", "name"=>"Granite Mountain Trail", "slug"=>"us/california/granite-mountain-trail", "overview"=>"Granite Mountain Trail is a 6.5 mile out and back trail located near Julian, California and is only recommended for very experienced outdoorsmen. The trail is primarily used for hiking and is accessible from November until April.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"3.0054", "location"=>{"postalCode"=>"", "city"=>"Julian", "region"=>"CA", "country"=>"US", "latitude"=>"33.0641412", "longitude"=>"-116.4418613"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"0", "difficulty"=>"7", "duration"=>"25200", "visitorUsage"=>"", "seasonStart"=>"11", "seasonEnd"=>"4"}, "trailGeoStats"=>{"length"=>"10460.71", "elevationStart"=>"", "elevationGain"=>"975.36", "elevationMax"=>""}, "defaultPhoto"=>"", "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"1", "completedCount"=>"6", "trackCount"=>"1"}, "metadata"=>{"created"=>"2009-12-11T20:12:51Z", "updated"=>"2015-12-18T07:45:12Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Granite Mountain Trail"], ["distance", "10460.71"], ["elevation_gain", "975.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:45:29 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10029035", "name"=>"Tennessee Valley Trail", "slug"=>"us/california/tennessee-valley-trail", "overview"=>"Tennessee Valley Trail is a 3.4 mile out and back trail located near Sausalito, CA that features beautiful wild flowers. The trail is good for all skill levels  offers a number of activity options. Horses are also able to use this trail.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"22.1058", "location"=>{"postalCode"=>"", "city"=>"Sausalito", "region"=>"CA", "country"=>"US", "latitude"=>"37.8603413", "longitude"=>"-122.5363803"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Mountain Biking", "uid"=>"mountain-biking", "bitfieldPosition"=>"9", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "6"=>{"description"=>"", "name"=>"Horseback Riding", "uid"=>"horseback-riding", "bitfieldPosition"=>"23", "type"=>"activity"}, "7"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Beach", "uid"=>"beach", "bitfieldPosition"=>"1", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Kids", "uid"=>"kids", "bitfieldPosition"=>"7", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Wild Flowers", "uid"=>"wild-flowers", "bitfieldPosition"=>"12", "type"=>"trail-feature"}, "4"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.3", "difficulty"=>"1", "duration"=>"", "visitorUsage"=>"2", "seasonStart"=>"", "seasonEnd"=>""}, "trailGeoStats"=>{"length"=>"5487.8494", "elevationStart"=>"58.8264", "elevationGain"=>"39.9288", "elevationMax"=>"58.8264"}, "defaultPhoto"=>{"id"=>"10250828", "title"=>"", "description"=>"", "likeCount"=>"3", "trailId"=>"10029035", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10146215", "private"=>"true", "username"=>"Khowell23", "firstName"=>"Kate", "lastName"=>"H.", "reputation"=>"824", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "tracks"=>"", "maps"=>"", "photos"=>"", "lists"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"", "subscription"=>"", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-12-31T16:07:11Z", "updated"=>"2014-05-10T21:24:44Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"19", "completedCount"=>"278", "trackCount"=>"38"}, "metadata"=>{"created"=>"2015-10-13T18:00:11Z", "updated"=>"2016-01-21T00:41:00Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Tennessee Valley Trail"], ["distance", "5487.8494"], ["elevation_gain", "39.9288"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:45:29 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10035772", "name"=>"Runyon Canyon Trail", "slug"=>"us/california/runyon-canyon-trail", "overview"=>"Runyon Canyon Trail is a 3.5 mile loop trail located near Los Angeles, California that offers scenic views and is rated as moderate. The trail is primarily used for hiking & trail running and is accessible from September until May. Dogs are also able to use this trail but must be kept on leash.", "routeType"=>{"uid"=>"L", "name"=>"Loop"}, "popularity"=>"61.1954", "location"=>{"postalCode"=>"", "city"=>"Los Angeles", "region"=>"CA", "country"=>"US", "latitude"=>"34.1052612", "longitude"=>"-118.3489934"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Dogs Leash", "uid"=>"dogs-leash", "bitfieldPosition"=>"4", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"3.9", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"4", "seasonStart"=>"1", "seasonEnd"=>"12"}, "trailGeoStats"=>{"length"=>"5632.69", "elevationStart"=>"", "elevationGain"=>"213.36", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10291896", "title"=>"The Griffith Observatory from the first bend in Runyon Canyon trail", "description"=>"", "likeCount"=>"2", "trailId"=>"10035772", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"34.107256", "longitude"=>"-118.350305"}, "user"=>{"id"=>"", "private"=>"", "username"=>"DaveAtkinson", "firstName"=>"", "lastName"=>"", "reputation"=>"", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "maps"=>"", "photos"=>"", "location"=>{"city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2012-04-25T16:36:32Z", "updated"=>"2012-04-25T16:36:32Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"295", "completedCount"=>"2271", "trackCount"=>"265"}, "metadata"=>{"created"=>"2015-08-08T06:00:01Z", "updated"=>"2016-01-20T22:14:11Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Runyon Canyon Trail"], ["distance", "5632.69"], ["elevation_gain", "213.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:45:30 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10033941", "name"=>"Estes Cone", "slug"=>"us/colorado/estes-cone", "overview"=>"Estes Cone is a 6.2 mile out and back trail located near Estes Park, CO that offers the chance to see wildlife and is rated as moderate. The trail is primarily used for hiking and is accessible from May until November.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"13.8647", "location"=>{"postalCode"=>"", "city"=>"Estes Park", "region"=>"CO", "country"=>"US", "latitude"=>"40.2713962", "longitude"=>"-105.5564733"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.4", "difficulty"=>"3", "duration"=>"10800", "visitorUsage"=>"2", "seasonStart"=>"5", "seasonEnd"=>"11"}, "trailGeoStats"=>{"length"=>"9929.6278", "elevationStart"=>"2860.8528", "elevationGain"=>"562.9656", "elevationMax"=>"3354.9336"}, "defaultPhoto"=>{"id"=>"10215580", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10033941", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10084342", "private"=>"", "username"=>"putmeontherock", "firstName"=>"Cody", "lastName"=>"Martin", "slug"=>"putmeontherock", "reputation"=>"80", "reviews"=>"1", "completed"=>"0", "following"=>"0", "followers"=>"0", "tracks"=>"0", "maps"=>"0", "photos"=>"1", "lists"=>"0", "location"=>{"postalCode"=>"38820", "city"=>"Algoma", "region"=>"MS", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-05-31T18:40:53Z", "updated"=>"2012-08-29T15:12:24Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"16", "completedCount"=>"126", "trackCount"=>"12"}, "metadata"=>{"created"=>"2015-10-18T00:00:55Z", "updated"=>"2016-01-21T00:33:05Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Estes Cone"], ["distance", "9929.6278"], ["elevation_gain", "562.9656"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:45:30 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10207801", "name"=>"Cataract Falls Trail", "slug"=>"us/california/cataract-falls-trail", "overview"=>"Cataract Falls Trail is a 2.9 mile out and back trail that explores the stunning waterfalls that flow into Alpine Lake. The offers birding, hiking, trail running & walking. The falls flow the best after a recent rain, although the trails can be a bit muddy as well.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"33.335", "location"=>{"postalCode"=>"", "city"=>"Fairfax", "region"=>"CA", "country"=>"US", "latitude"=>"37.9364793", "longitude"=>"-122.6379993"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Forest", "uid"=>"forest", "bitfieldPosition"=>"5", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"River", "uid"=>"river", "bitfieldPosition"=>"9", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Waterfall", "uid"=>"waterfall", "bitfieldPosition"=>"11", "type"=>"trail-feature"}}, "obstacles"=>{"0"=>{"description"=>"", "name"=>"Scramble", "uid"=>"scramble", "bitfieldPosition"=>"", "type"=>"trail-obstacle"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.5", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"1", "seasonStart"=>"12", "seasonEnd"=>"5"}, "trailGeoStats"=>{"length"=>"4345.218", "elevationStart"=>"136.8552", "elevationGain"=>"320.04", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10475809", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10207801", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"37.9325", "longitude"=>"-122.6366667"}, "user"=>{"id"=>"11101982", "private"=>"false", "username"=>"niall", "firstName"=>"Niall", "lastName"=>"Kennedy", "slug"=>"niall", "reputation"=>"230", "reviews"=>"0", "completed"=>"1", "following"=>"1", "followers"=>"0", "tracks"=>"65", "maps"=>"0", "photos"=>"80", "lists"=>"0", "activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}}, "location"=>{"postalCode"=>"94103", "city"=>"San Francisco", "region"=>"CA", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>{"id"=>"10475684", "title"=>"", "description"=>"", "trailId"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "metadata"=>{"created"=>"2012-11-11T16:35:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}}, "metadata"=>{"created"=>"2012-11-11T17:26:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"70", "completedCount"=>"389", "trackCount"=>"46"}, "metadata"=>{"created"=>"2015-09-12T22:00:12Z", "updated"=>"2016-01-20T18:23:21Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Cataract Falls Trail"], ["distance", "4345.218"], ["elevation_gain", "320.04"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/trails?trailName=Runyon+Canyon+Trail&pace=3.5&weight=130" for ::1 at 2016-01-23 19:45:33 -0800
+Processing by TrailsController#index as HTML
+  Parameters: {"trailName"=>"Runyon Canyon Trail", "pace"=>"3.5", "weight"=>"130"}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 LIMIT 1[0m  [["name", "Runyon Canyon Trail"]]
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.2ms)
+
+TypeError (no implicit conversion of Fixnum into String):
+  app/models/trail.rb:36:in `+'
+  app/models/trail.rb:36:in `calorie_counter'
+  app/controllers/trails_controller.rb:9:in `index'
+
+
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.8ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.7ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (45.7ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (54.0ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (122.9ms)
+
+
+Started GET "/" for ::1 at 2016-01-23 19:45:57 -0800
+Processing by TrailsController#index as HTML
+  [1m[35mTrail Load (0.3ms)[0m  SELECT "trails".* FROM "trails"
+  Rendered trails/index.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 27ms (Views: 23.2ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:45:57 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 19:45:57 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:45:58 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 19:45:58 -0800
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:45:58 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 19:45:58 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:45:58 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:45:58 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:45:58 -0800
+
+
+Started GET "/assets/application.self-6e19cb3a97bc571f29ab0fbd1355776f3b35497a215de38e5515f4caa92c9f13.js?body=1" for ::1 at 2016-01-23 19:45:58 -0800
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:45:58 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10207801", "name"=>"Cataract Falls Trail", "slug"=>"us/california/cataract-falls-trail", "overview"=>"Cataract Falls Trail is a 2.9 mile out and back trail that explores the stunning waterfalls that flow into Alpine Lake. The offers birding, hiking, trail running & walking. The falls flow the best after a recent rain, although the trails can be a bit muddy as well.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"33.335", "location"=>{"postalCode"=>"", "city"=>"Fairfax", "region"=>"CA", "country"=>"US", "latitude"=>"37.9364793", "longitude"=>"-122.6379993"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Forest", "uid"=>"forest", "bitfieldPosition"=>"5", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"River", "uid"=>"river", "bitfieldPosition"=>"9", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Waterfall", "uid"=>"waterfall", "bitfieldPosition"=>"11", "type"=>"trail-feature"}}, "obstacles"=>{"0"=>{"description"=>"", "name"=>"Scramble", "uid"=>"scramble", "bitfieldPosition"=>"", "type"=>"trail-obstacle"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.5", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"1", "seasonStart"=>"12", "seasonEnd"=>"5"}, "trailGeoStats"=>{"length"=>"4345.218", "elevationStart"=>"136.8552", "elevationGain"=>"320.04", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10475809", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10207801", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"37.9325", "longitude"=>"-122.6366667"}, "user"=>{"id"=>"11101982", "private"=>"false", "username"=>"niall", "firstName"=>"Niall", "lastName"=>"Kennedy", "slug"=>"niall", "reputation"=>"230", "reviews"=>"0", "completed"=>"1", "following"=>"1", "followers"=>"0", "tracks"=>"65", "maps"=>"0", "photos"=>"80", "lists"=>"0", "activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}}, "location"=>{"postalCode"=>"94103", "city"=>"San Francisco", "region"=>"CA", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>{"id"=>"10475684", "title"=>"", "description"=>"", "trailId"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "metadata"=>{"created"=>"2012-11-11T16:35:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}}, "metadata"=>{"created"=>"2012-11-11T17:26:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"70", "completedCount"=>"389", "trackCount"=>"46"}, "metadata"=>{"created"=>"2015-09-12T22:00:12Z", "updated"=>"2016-01-20T18:23:21Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Cataract Falls Trail"], ["distance", "4345.218"], ["elevation_gain", "320.04"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:45:58 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10034022", "name"=>"Granite Mountain Trail", "slug"=>"us/california/granite-mountain-trail", "overview"=>"Granite Mountain Trail is a 6.5 mile out and back trail located near Julian, California and is only recommended for very experienced outdoorsmen. The trail is primarily used for hiking and is accessible from November until April.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"3.0054", "location"=>{"postalCode"=>"", "city"=>"Julian", "region"=>"CA", "country"=>"US", "latitude"=>"33.0641412", "longitude"=>"-116.4418613"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"0", "difficulty"=>"7", "duration"=>"25200", "visitorUsage"=>"", "seasonStart"=>"11", "seasonEnd"=>"4"}, "trailGeoStats"=>{"length"=>"10460.71", "elevationStart"=>"", "elevationGain"=>"975.36", "elevationMax"=>""}, "defaultPhoto"=>"", "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"1", "completedCount"=>"6", "trackCount"=>"1"}, "metadata"=>{"created"=>"2009-12-11T20:12:51Z", "updated"=>"2015-12-18T07:45:12Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Granite Mountain Trail"], ["distance", "10460.71"], ["elevation_gain", "975.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:45:58 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10035772", "name"=>"Runyon Canyon Trail", "slug"=>"us/california/runyon-canyon-trail", "overview"=>"Runyon Canyon Trail is a 3.5 mile loop trail located near Los Angeles, California that offers scenic views and is rated as moderate. The trail is primarily used for hiking & trail running and is accessible from September until May. Dogs are also able to use this trail but must be kept on leash.", "routeType"=>{"uid"=>"L", "name"=>"Loop"}, "popularity"=>"61.1954", "location"=>{"postalCode"=>"", "city"=>"Los Angeles", "region"=>"CA", "country"=>"US", "latitude"=>"34.1052612", "longitude"=>"-118.3489934"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Dogs Leash", "uid"=>"dogs-leash", "bitfieldPosition"=>"4", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"3.9", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"4", "seasonStart"=>"1", "seasonEnd"=>"12"}, "trailGeoStats"=>{"length"=>"5632.69", "elevationStart"=>"", "elevationGain"=>"213.36", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10291896", "title"=>"The Griffith Observatory from the first bend in Runyon Canyon trail", "description"=>"", "likeCount"=>"2", "trailId"=>"10035772", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"34.107256", "longitude"=>"-118.350305"}, "user"=>{"id"=>"", "private"=>"", "username"=>"DaveAtkinson", "firstName"=>"", "lastName"=>"", "reputation"=>"", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "maps"=>"", "photos"=>"", "location"=>{"city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2012-04-25T16:36:32Z", "updated"=>"2012-04-25T16:36:32Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"295", "completedCount"=>"2271", "trackCount"=>"265"}, "metadata"=>{"created"=>"2015-08-08T06:00:01Z", "updated"=>"2016-01-20T22:14:11Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Runyon Canyon Trail"], ["distance", "5632.69"], ["elevation_gain", "213.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:45:58 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10033941", "name"=>"Estes Cone", "slug"=>"us/colorado/estes-cone", "overview"=>"Estes Cone is a 6.2 mile out and back trail located near Estes Park, CO that offers the chance to see wildlife and is rated as moderate. The trail is primarily used for hiking and is accessible from May until November.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"13.8647", "location"=>{"postalCode"=>"", "city"=>"Estes Park", "region"=>"CO", "country"=>"US", "latitude"=>"40.2713962", "longitude"=>"-105.5564733"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.4", "difficulty"=>"3", "duration"=>"10800", "visitorUsage"=>"2", "seasonStart"=>"5", "seasonEnd"=>"11"}, "trailGeoStats"=>{"length"=>"9929.6278", "elevationStart"=>"2860.8528", "elevationGain"=>"562.9656", "elevationMax"=>"3354.9336"}, "defaultPhoto"=>{"id"=>"10215580", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10033941", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10084342", "private"=>"", "username"=>"putmeontherock", "firstName"=>"Cody", "lastName"=>"Martin", "slug"=>"putmeontherock", "reputation"=>"80", "reviews"=>"1", "completed"=>"0", "following"=>"0", "followers"=>"0", "tracks"=>"0", "maps"=>"0", "photos"=>"1", "lists"=>"0", "location"=>{"postalCode"=>"38820", "city"=>"Algoma", "region"=>"MS", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-05-31T18:40:53Z", "updated"=>"2012-08-29T15:12:24Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"16", "completedCount"=>"126", "trackCount"=>"12"}, "metadata"=>{"created"=>"2015-10-18T00:00:55Z", "updated"=>"2016-01-21T00:33:05Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.4ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Estes Cone"], ["distance", "9929.6278"], ["elevation_gain", "562.9656"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:45:58 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10029035", "name"=>"Tennessee Valley Trail", "slug"=>"us/california/tennessee-valley-trail", "overview"=>"Tennessee Valley Trail is a 3.4 mile out and back trail located near Sausalito, CA that features beautiful wild flowers. The trail is good for all skill levels  offers a number of activity options. Horses are also able to use this trail.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"22.1058", "location"=>{"postalCode"=>"", "city"=>"Sausalito", "region"=>"CA", "country"=>"US", "latitude"=>"37.8603413", "longitude"=>"-122.5363803"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Mountain Biking", "uid"=>"mountain-biking", "bitfieldPosition"=>"9", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "6"=>{"description"=>"", "name"=>"Horseback Riding", "uid"=>"horseback-riding", "bitfieldPosition"=>"23", "type"=>"activity"}, "7"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Beach", "uid"=>"beach", "bitfieldPosition"=>"1", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Kids", "uid"=>"kids", "bitfieldPosition"=>"7", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Wild Flowers", "uid"=>"wild-flowers", "bitfieldPosition"=>"12", "type"=>"trail-feature"}, "4"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.3", "difficulty"=>"1", "duration"=>"", "visitorUsage"=>"2", "seasonStart"=>"", "seasonEnd"=>""}, "trailGeoStats"=>{"length"=>"5487.8494", "elevationStart"=>"58.8264", "elevationGain"=>"39.9288", "elevationMax"=>"58.8264"}, "defaultPhoto"=>{"id"=>"10250828", "title"=>"", "description"=>"", "likeCount"=>"3", "trailId"=>"10029035", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10146215", "private"=>"true", "username"=>"Khowell23", "firstName"=>"Kate", "lastName"=>"H.", "reputation"=>"824", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "tracks"=>"", "maps"=>"", "photos"=>"", "lists"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"", "subscription"=>"", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-12-31T16:07:11Z", "updated"=>"2014-05-10T21:24:44Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"19", "completedCount"=>"278", "trackCount"=>"38"}, "metadata"=>{"created"=>"2015-10-13T18:00:11Z", "updated"=>"2016-01-21T00:41:00Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.4ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Tennessee Valley Trail"], ["distance", "5487.8494"], ["elevation_gain", "39.9288"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/trails?trailName=Runyon+Canyon+Trail&pace=4.5&weight=175" for ::1 at 2016-01-23 19:46:03 -0800
+Processing by TrailsController#index as HTML
+  Parameters: {"trailName"=>"Runyon Canyon Trail", "pace"=>"4.5", "weight"=>"175"}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 LIMIT 1  [["name", "Runyon Canyon Trail"]]
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.2ms)
+
+TypeError (no implicit conversion of Fixnum into String):
+  app/models/trail.rb:36:in `+'
+  app/models/trail.rb:36:in `calorie_counter'
+  app/controllers/trails_controller.rb:9:in `index'
+
+
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.8ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (55.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (50.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (111.4ms)
+
+
+Started GET "/trails?trailName=Runyon+Canyon+Trail&pace=4.5&weight=175" for ::1 at 2016-01-23 19:46:06 -0800
+Processing by TrailsController#index as HTML
+  Parameters: {"trailName"=>"Runyon Canyon Trail", "pace"=>"4.5", "weight"=>"175"}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 LIMIT 1[0m  [["name", "Runyon Canyon Trail"]]
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.2ms)
+
+TypeError (no implicit conversion of Fixnum into String):
+  app/models/trail.rb:36:in `+'
+  app/models/trail.rb:36:in `calorie_counter'
+  app/controllers/trails_controller.rb:9:in `index'
+
+
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.9ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.8ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (45.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (51.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (112.4ms)
+
+
+Started GET "/" for ::1 at 2016-01-23 19:47:49 -0800
+Processing by TrailsController#index as HTML
+  [1m[35mTrail Load (0.3ms)[0m  SELECT "trails".* FROM "trails"
+  Rendered trails/index.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 22ms (Views: 18.3ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:47:49 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 19:47:49 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 19:47:49 -0800
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:47:49 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:47:49 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 19:47:49 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:47:49 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:47:49 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:47:49 -0800
+
+
+Started GET "/assets/application.self-6e19cb3a97bc571f29ab0fbd1355776f3b35497a215de38e5515f4caa92c9f13.js?body=1" for ::1 at 2016-01-23 19:47:49 -0800
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:47:50 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10035772", "name"=>"Runyon Canyon Trail", "slug"=>"us/california/runyon-canyon-trail", "overview"=>"Runyon Canyon Trail is a 3.5 mile loop trail located near Los Angeles, California that offers scenic views and is rated as moderate. The trail is primarily used for hiking & trail running and is accessible from September until May. Dogs are also able to use this trail but must be kept on leash.", "routeType"=>{"uid"=>"L", "name"=>"Loop"}, "popularity"=>"61.1954", "location"=>{"postalCode"=>"", "city"=>"Los Angeles", "region"=>"CA", "country"=>"US", "latitude"=>"34.1052612", "longitude"=>"-118.3489934"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Dogs Leash", "uid"=>"dogs-leash", "bitfieldPosition"=>"4", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"3.9", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"4", "seasonStart"=>"1", "seasonEnd"=>"12"}, "trailGeoStats"=>{"length"=>"5632.69", "elevationStart"=>"", "elevationGain"=>"213.36", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10291896", "title"=>"The Griffith Observatory from the first bend in Runyon Canyon trail", "description"=>"", "likeCount"=>"2", "trailId"=>"10035772", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"34.107256", "longitude"=>"-118.350305"}, "user"=>{"id"=>"", "private"=>"", "username"=>"DaveAtkinson", "firstName"=>"", "lastName"=>"", "reputation"=>"", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "maps"=>"", "photos"=>"", "location"=>{"city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2012-04-25T16:36:32Z", "updated"=>"2012-04-25T16:36:32Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"295", "completedCount"=>"2271", "trackCount"=>"265"}, "metadata"=>{"created"=>"2015-08-08T06:00:01Z", "updated"=>"2016-01-20T22:14:11Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.3ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Runyon Canyon Trail"], ["distance", "5632.69"], ["elevation_gain", "213.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:47:51 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10207801", "name"=>"Cataract Falls Trail", "slug"=>"us/california/cataract-falls-trail", "overview"=>"Cataract Falls Trail is a 2.9 mile out and back trail that explores the stunning waterfalls that flow into Alpine Lake. The offers birding, hiking, trail running & walking. The falls flow the best after a recent rain, although the trails can be a bit muddy as well.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"33.335", "location"=>{"postalCode"=>"", "city"=>"Fairfax", "region"=>"CA", "country"=>"US", "latitude"=>"37.9364793", "longitude"=>"-122.6379993"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Forest", "uid"=>"forest", "bitfieldPosition"=>"5", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"River", "uid"=>"river", "bitfieldPosition"=>"9", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Waterfall", "uid"=>"waterfall", "bitfieldPosition"=>"11", "type"=>"trail-feature"}}, "obstacles"=>{"0"=>{"description"=>"", "name"=>"Scramble", "uid"=>"scramble", "bitfieldPosition"=>"", "type"=>"trail-obstacle"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.5", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"1", "seasonStart"=>"12", "seasonEnd"=>"5"}, "trailGeoStats"=>{"length"=>"4345.218", "elevationStart"=>"136.8552", "elevationGain"=>"320.04", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10475809", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10207801", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"37.9325", "longitude"=>"-122.6366667"}, "user"=>{"id"=>"11101982", "private"=>"false", "username"=>"niall", "firstName"=>"Niall", "lastName"=>"Kennedy", "slug"=>"niall", "reputation"=>"230", "reviews"=>"0", "completed"=>"1", "following"=>"1", "followers"=>"0", "tracks"=>"65", "maps"=>"0", "photos"=>"80", "lists"=>"0", "activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}}, "location"=>{"postalCode"=>"94103", "city"=>"San Francisco", "region"=>"CA", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>{"id"=>"10475684", "title"=>"", "description"=>"", "trailId"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "metadata"=>{"created"=>"2012-11-11T16:35:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}}, "metadata"=>{"created"=>"2012-11-11T17:26:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"70", "completedCount"=>"389", "trackCount"=>"46"}, "metadata"=>{"created"=>"2015-09-12T22:00:12Z", "updated"=>"2016-01-20T18:23:21Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Cataract Falls Trail"], ["distance", "4345.218"], ["elevation_gain", "320.04"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:47:51 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10029035", "name"=>"Tennessee Valley Trail", "slug"=>"us/california/tennessee-valley-trail", "overview"=>"Tennessee Valley Trail is a 3.4 mile out and back trail located near Sausalito, CA that features beautiful wild flowers. The trail is good for all skill levels  offers a number of activity options. Horses are also able to use this trail.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"22.1058", "location"=>{"postalCode"=>"", "city"=>"Sausalito", "region"=>"CA", "country"=>"US", "latitude"=>"37.8603413", "longitude"=>"-122.5363803"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Mountain Biking", "uid"=>"mountain-biking", "bitfieldPosition"=>"9", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "6"=>{"description"=>"", "name"=>"Horseback Riding", "uid"=>"horseback-riding", "bitfieldPosition"=>"23", "type"=>"activity"}, "7"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Beach", "uid"=>"beach", "bitfieldPosition"=>"1", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Kids", "uid"=>"kids", "bitfieldPosition"=>"7", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Wild Flowers", "uid"=>"wild-flowers", "bitfieldPosition"=>"12", "type"=>"trail-feature"}, "4"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.3", "difficulty"=>"1", "duration"=>"", "visitorUsage"=>"2", "seasonStart"=>"", "seasonEnd"=>""}, "trailGeoStats"=>{"length"=>"5487.8494", "elevationStart"=>"58.8264", "elevationGain"=>"39.9288", "elevationMax"=>"58.8264"}, "defaultPhoto"=>{"id"=>"10250828", "title"=>"", "description"=>"", "likeCount"=>"3", "trailId"=>"10029035", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10146215", "private"=>"true", "username"=>"Khowell23", "firstName"=>"Kate", "lastName"=>"H.", "reputation"=>"824", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "tracks"=>"", "maps"=>"", "photos"=>"", "lists"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"", "subscription"=>"", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-12-31T16:07:11Z", "updated"=>"2014-05-10T21:24:44Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"19", "completedCount"=>"278", "trackCount"=>"38"}, "metadata"=>{"created"=>"2015-10-13T18:00:11Z", "updated"=>"2016-01-21T00:41:00Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Tennessee Valley Trail"], ["distance", "5487.8494"], ["elevation_gain", "39.9288"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:47:51 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10034022", "name"=>"Granite Mountain Trail", "slug"=>"us/california/granite-mountain-trail", "overview"=>"Granite Mountain Trail is a 6.5 mile out and back trail located near Julian, California and is only recommended for very experienced outdoorsmen. The trail is primarily used for hiking and is accessible from November until April.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"3.0054", "location"=>{"postalCode"=>"", "city"=>"Julian", "region"=>"CA", "country"=>"US", "latitude"=>"33.0641412", "longitude"=>"-116.4418613"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"0", "difficulty"=>"7", "duration"=>"25200", "visitorUsage"=>"", "seasonStart"=>"11", "seasonEnd"=>"4"}, "trailGeoStats"=>{"length"=>"10460.71", "elevationStart"=>"", "elevationGain"=>"975.36", "elevationMax"=>""}, "defaultPhoto"=>"", "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"1", "completedCount"=>"6", "trackCount"=>"1"}, "metadata"=>{"created"=>"2009-12-11T20:12:51Z", "updated"=>"2015-12-18T07:45:12Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.3ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Granite Mountain Trail"], ["distance", "10460.71"], ["elevation_gain", "975.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:47:51 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10033941", "name"=>"Estes Cone", "slug"=>"us/colorado/estes-cone", "overview"=>"Estes Cone is a 6.2 mile out and back trail located near Estes Park, CO that offers the chance to see wildlife and is rated as moderate. The trail is primarily used for hiking and is accessible from May until November.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"13.8647", "location"=>{"postalCode"=>"", "city"=>"Estes Park", "region"=>"CO", "country"=>"US", "latitude"=>"40.2713962", "longitude"=>"-105.5564733"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.4", "difficulty"=>"3", "duration"=>"10800", "visitorUsage"=>"2", "seasonStart"=>"5", "seasonEnd"=>"11"}, "trailGeoStats"=>{"length"=>"9929.6278", "elevationStart"=>"2860.8528", "elevationGain"=>"562.9656", "elevationMax"=>"3354.9336"}, "defaultPhoto"=>{"id"=>"10215580", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10033941", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10084342", "private"=>"", "username"=>"putmeontherock", "firstName"=>"Cody", "lastName"=>"Martin", "slug"=>"putmeontherock", "reputation"=>"80", "reviews"=>"1", "completed"=>"0", "following"=>"0", "followers"=>"0", "tracks"=>"0", "maps"=>"0", "photos"=>"1", "lists"=>"0", "location"=>{"postalCode"=>"38820", "city"=>"Algoma", "region"=>"MS", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-05-31T18:40:53Z", "updated"=>"2012-08-29T15:12:24Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"16", "completedCount"=>"126", "trackCount"=>"12"}, "metadata"=>{"created"=>"2015-10-18T00:00:55Z", "updated"=>"2016-01-21T00:33:05Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Estes Cone"], ["distance", "9929.6278"], ["elevation_gain", "562.9656"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/trails?trailName=Cataract+Falls+Trail&pace=4&weight=145" for ::1 at 2016-01-23 19:47:54 -0800
+Processing by TrailsController#index as HTML
+  Parameters: {"trailName"=>"Cataract Falls Trail", "pace"=>"4", "weight"=>"145"}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 LIMIT 1  [["name", "Cataract Falls Trail"]]
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.2ms)
+
+TypeError (1.0045 can't be coerced into Fixnum):
+  app/models/trail.rb:41:in `^'
+  app/models/trail.rb:41:in `calorie_counter'
+  app/controllers/trails_controller.rb:9:in `index'
+
+
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.6ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.9ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (51.9ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (55.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (118.4ms)
+
+
+Started GET "/trails?trailName=Cataract+Falls+Trail&pace=4&weight=145" for ::1 at 2016-01-23 19:47:56 -0800
+Processing by TrailsController#index as HTML
+  Parameters: {"trailName"=>"Cataract Falls Trail", "pace"=>"4", "weight"=>"145"}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 LIMIT 1[0m  [["name", "Cataract Falls Trail"]]
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.2ms)
+
+TypeError (1.0045 can't be coerced into Fixnum):
+  app/models/trail.rb:41:in `^'
+  app/models/trail.rb:41:in `calorie_counter'
+  app/controllers/trails_controller.rb:9:in `index'
+
+
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.0ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.8ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (50.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (47.7ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (109.3ms)
+
+
+Started GET "/" for ::1 at 2016-01-23 19:48:41 -0800
+Processing by TrailsController#index as HTML
+  [1m[35mTrail Load (0.3ms)[0m  SELECT "trails".* FROM "trails"
+  Rendered trails/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 27ms (Views: 22.9ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/assets/hikes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:48:42 -0800
+
+
+Started GET "/assets/trails.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:48:42 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-01-23 19:48:42 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2016-01-23 19:48:42 -0800
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-23 19:48:42 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-23 19:48:42 -0800
+
+
+Started GET "/assets/hikes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:48:42 -0800
+
+
+Started GET "/assets/trails.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:48:42 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-01-23 19:48:42 -0800
+
+
+Started GET "/assets/application.self-6e19cb3a97bc571f29ab0fbd1355776f3b35497a215de38e5515f4caa92c9f13.js?body=1" for ::1 at 2016-01-23 19:48:42 -0800
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:48:42 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10033941", "name"=>"Estes Cone", "slug"=>"us/colorado/estes-cone", "overview"=>"Estes Cone is a 6.2 mile out and back trail located near Estes Park, CO that offers the chance to see wildlife and is rated as moderate. The trail is primarily used for hiking and is accessible from May until November.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"13.8647", "location"=>{"postalCode"=>"", "city"=>"Estes Park", "region"=>"CO", "country"=>"US", "latitude"=>"40.2713962", "longitude"=>"-105.5564733"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.4", "difficulty"=>"3", "duration"=>"10800", "visitorUsage"=>"2", "seasonStart"=>"5", "seasonEnd"=>"11"}, "trailGeoStats"=>{"length"=>"9929.6278", "elevationStart"=>"2860.8528", "elevationGain"=>"562.9656", "elevationMax"=>"3354.9336"}, "defaultPhoto"=>{"id"=>"10215580", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10033941", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10084342", "private"=>"", "username"=>"putmeontherock", "firstName"=>"Cody", "lastName"=>"Martin", "slug"=>"putmeontherock", "reputation"=>"80", "reviews"=>"1", "completed"=>"0", "following"=>"0", "followers"=>"0", "tracks"=>"0", "maps"=>"0", "photos"=>"1", "lists"=>"0", "location"=>{"postalCode"=>"38820", "city"=>"Algoma", "region"=>"MS", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-05-31T18:40:53Z", "updated"=>"2012-08-29T15:12:24Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"16", "completedCount"=>"126", "trackCount"=>"12"}, "metadata"=>{"created"=>"2015-10-18T00:00:55Z", "updated"=>"2016-01-21T00:33:05Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Estes Cone"], ["distance", "9929.6278"], ["elevation_gain", "562.9656"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:48:42 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10207801", "name"=>"Cataract Falls Trail", "slug"=>"us/california/cataract-falls-trail", "overview"=>"Cataract Falls Trail is a 2.9 mile out and back trail that explores the stunning waterfalls that flow into Alpine Lake. The offers birding, hiking, trail running & walking. The falls flow the best after a recent rain, although the trails can be a bit muddy as well.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"33.335", "location"=>{"postalCode"=>"", "city"=>"Fairfax", "region"=>"CA", "country"=>"US", "latitude"=>"37.9364793", "longitude"=>"-122.6379993"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Forest", "uid"=>"forest", "bitfieldPosition"=>"5", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"River", "uid"=>"river", "bitfieldPosition"=>"9", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Waterfall", "uid"=>"waterfall", "bitfieldPosition"=>"11", "type"=>"trail-feature"}}, "obstacles"=>{"0"=>{"description"=>"", "name"=>"Scramble", "uid"=>"scramble", "bitfieldPosition"=>"", "type"=>"trail-obstacle"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.5", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"1", "seasonStart"=>"12", "seasonEnd"=>"5"}, "trailGeoStats"=>{"length"=>"4345.218", "elevationStart"=>"136.8552", "elevationGain"=>"320.04", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10475809", "title"=>"", "description"=>"", "likeCount"=>"0", "trailId"=>"10207801", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"37.9325", "longitude"=>"-122.6366667"}, "user"=>{"id"=>"11101982", "private"=>"false", "username"=>"niall", "firstName"=>"Niall", "lastName"=>"Kennedy", "slug"=>"niall", "reputation"=>"230", "reviews"=>"0", "completed"=>"1", "following"=>"1", "followers"=>"0", "tracks"=>"65", "maps"=>"0", "photos"=>"80", "lists"=>"0", "activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}}, "location"=>{"postalCode"=>"94103", "city"=>"San Francisco", "region"=>"CA", "country"=>"US", "latitude"=>"", "longitude"=>""}, "subscription"=>"", "pro"=>"false", "admin"=>"false", "profilePhoto"=>{"id"=>"10475684", "title"=>"", "description"=>"", "trailId"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "metadata"=>{"created"=>"2012-11-11T16:35:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}}, "metadata"=>{"created"=>"2012-11-11T17:26:28Z", "updated"=>"2014-01-18T22:07:16Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"70", "completedCount"=>"389", "trackCount"=>"46"}, "metadata"=>{"created"=>"2015-09-12T22:00:12Z", "updated"=>"2016-01-20T18:23:21Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Cataract Falls Trail"], ["distance", "4345.218"], ["elevation_gain", "320.04"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:48:42 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10034022", "name"=>"Granite Mountain Trail", "slug"=>"us/california/granite-mountain-trail", "overview"=>"Granite Mountain Trail is a 6.5 mile out and back trail located near Julian, California and is only recommended for very experienced outdoorsmen. The trail is primarily used for hiking and is accessible from November until April.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"3.0054", "location"=>{"postalCode"=>"", "city"=>"Julian", "region"=>"CA", "country"=>"US", "latitude"=>"33.0641412", "longitude"=>"-116.4418613"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"0", "difficulty"=>"7", "duration"=>"25200", "visitorUsage"=>"", "seasonStart"=>"11", "seasonEnd"=>"4"}, "trailGeoStats"=>{"length"=>"10460.71", "elevationStart"=>"", "elevationGain"=>"975.36", "elevationMax"=>""}, "defaultPhoto"=>"", "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"1", "completedCount"=>"6", "trackCount"=>"1"}, "metadata"=>{"created"=>"2009-12-11T20:12:51Z", "updated"=>"2015-12-18T07:45:12Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Granite Mountain Trail"], ["distance", "10460.71"], ["elevation_gain", "975.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:48:42 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10029035", "name"=>"Tennessee Valley Trail", "slug"=>"us/california/tennessee-valley-trail", "overview"=>"Tennessee Valley Trail is a 3.4 mile out and back trail located near Sausalito, CA that features beautiful wild flowers. The trail is good for all skill levels  offers a number of activity options. Horses are also able to use this trail.", "routeType"=>{"uid"=>"O", "name"=>"Out & Back"}, "popularity"=>"22.1058", "location"=>{"postalCode"=>"", "city"=>"Sausalito", "region"=>"CA", "country"=>"US", "latitude"=>"37.8603413", "longitude"=>"-122.5363803"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Birding", "uid"=>"birding", "bitfieldPosition"=>"1", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Mountain Biking", "uid"=>"mountain-biking", "bitfieldPosition"=>"9", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Nature Trips", "uid"=>"nature-trips", "bitfieldPosition"=>"10", "type"=>"activity"}, "4"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "5"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "6"=>{"description"=>"", "name"=>"Horseback Riding", "uid"=>"horseback-riding", "bitfieldPosition"=>"23", "type"=>"activity"}, "7"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Beach", "uid"=>"beach", "bitfieldPosition"=>"1", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Kids", "uid"=>"kids", "bitfieldPosition"=>"7", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}, "3"=>{"description"=>"", "name"=>"Wild Flowers", "uid"=>"wild-flowers", "bitfieldPosition"=>"12", "type"=>"trail-feature"}, "4"=>{"description"=>"", "name"=>"Wildlife", "uid"=>"wildlife", "bitfieldPosition"=>"13", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"4.3", "difficulty"=>"1", "duration"=>"", "visitorUsage"=>"2", "seasonStart"=>"", "seasonEnd"=>""}, "trailGeoStats"=>{"length"=>"5487.8494", "elevationStart"=>"58.8264", "elevationGain"=>"39.9288", "elevationMax"=>"58.8264"}, "defaultPhoto"=>{"id"=>"10250828", "title"=>"", "description"=>"", "likeCount"=>"3", "trailId"=>"10029035", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "user"=>{"id"=>"10146215", "private"=>"true", "username"=>"Khowell23", "firstName"=>"Kate", "lastName"=>"H.", "reputation"=>"824", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "tracks"=>"", "maps"=>"", "photos"=>"", "lists"=>"", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"", "subscription"=>"", "profilePhoto"=>""}, "metadata"=>{"created"=>"2011-12-31T16:07:11Z", "updated"=>"2014-05-10T21:24:44Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"19", "completedCount"=>"278", "trackCount"=>"38"}, "metadata"=>{"created"=>"2015-10-13T18:00:11Z", "updated"=>"2016-01-21T00:41:00Z", "status"=>"A"}}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1  [["name", "Tennessee Valley Trail"], ["distance", "5487.8494"], ["elevation_gain", "39.9288"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/trails" for ::1 at 2016-01-23 19:48:42 -0800
+Processing by TrailsController#create as JSON
+  Parameters: {"id"=>"10035772", "name"=>"Runyon Canyon Trail", "slug"=>"us/california/runyon-canyon-trail", "overview"=>"Runyon Canyon Trail is a 3.5 mile loop trail located near Los Angeles, California that offers scenic views and is rated as moderate. The trail is primarily used for hiking & trail running and is accessible from September until May. Dogs are also able to use this trail but must be kept on leash.", "routeType"=>{"uid"=>"L", "name"=>"Loop"}, "popularity"=>"61.1954", "location"=>{"postalCode"=>"", "city"=>"Los Angeles", "region"=>"CA", "country"=>"US", "latitude"=>"34.1052612", "longitude"=>"-118.3489934"}, "attributes"=>{"activities"=>{"0"=>{"description"=>"", "name"=>"Hiking", "uid"=>"hiking", "bitfieldPosition"=>"7", "type"=>"activity"}, "1"=>{"description"=>"", "name"=>"Trail Running", "uid"=>"trail-running", "bitfieldPosition"=>"20", "type"=>"activity"}, "2"=>{"description"=>"", "name"=>"Walking", "uid"=>"walking", "bitfieldPosition"=>"21", "type"=>"activity"}, "3"=>{"description"=>"", "name"=>"Default", "uid"=>"default", "bitfieldPosition"=>"0", "type"=>"activity"}}, "features"=>{"0"=>{"description"=>"", "name"=>"Dogs", "uid"=>"dogs", "bitfieldPosition"=>"3", "type"=>"trail-feature"}, "1"=>{"description"=>"", "name"=>"Dogs Leash", "uid"=>"dogs-leash", "bitfieldPosition"=>"4", "type"=>"trail-feature"}, "2"=>{"description"=>"", "name"=>"Views", "uid"=>"views", "bitfieldPosition"=>"10", "type"=>"trail-feature"}}}, "defaultActivityStats"=>{"activity"=>"default", "rating"=>"3.9", "difficulty"=>"3", "duration"=>"7200", "visitorUsage"=>"4", "seasonStart"=>"1", "seasonEnd"=>"12"}, "trailGeoStats"=>{"length"=>"5632.69", "elevationStart"=>"", "elevationGain"=>"213.36", "elevationMax"=>""}, "defaultPhoto"=>{"id"=>"10291896", "title"=>"The Griffith Observatory from the first bend in Runyon Canyon trail", "description"=>"", "likeCount"=>"2", "trailId"=>"10035772", "location"=>{"postalCode"=>"", "city"=>"", "region"=>"", "country"=>"", "latitude"=>"34.107256", "longitude"=>"-118.350305"}, "user"=>{"id"=>"", "private"=>"", "username"=>"DaveAtkinson", "firstName"=>"", "lastName"=>"", "reputation"=>"", "reviews"=>"", "completed"=>"", "following"=>"", "followers"=>"", "maps"=>"", "photos"=>"", "location"=>{"city"=>"", "region"=>"", "country"=>"", "latitude"=>"", "longitude"=>""}, "pro"=>"false", "profilePhoto"=>""}, "metadata"=>{"created"=>"2012-04-25T16:36:32Z", "updated"=>"2012-04-25T16:36:32Z", "status"=>"A"}}, "defaultMap"=>"", "trailCounts"=>{"reviewCount"=>"295", "completedCount"=>"2271", "trackCount"=>"265"}, "metadata"=>{"created"=>"2015-08-08T06:00:01Z", "updated"=>"2016-01-20T22:14:11Z", "status"=>"A"}}
+  [1m[36mTrail Load (0.2ms)[0m  [1mSELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 AND "trails"."distance" = $2 AND "trails"."elevation_gain" = $3 LIMIT 1[0m  [["name", "Runyon Canyon Trail"], ["distance", "5632.69"], ["elevation_gain", "213.36"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/trails?trailName=Runyon+Canyon+Trail&pace=4.5&weight=185" for ::1 at 2016-01-23 19:48:46 -0800
+Processing by TrailsController#index as HTML
+  Parameters: {"trailName"=>"Runyon Canyon Trail", "pace"=>"4.5", "weight"=>"185"}
+  [1m[35mTrail Load (0.2ms)[0m  SELECT  "trails".* FROM "trails" WHERE "trails"."name" = $1 LIMIT 1  [["name", "Runyon Canyon Trail"]]
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.2ms)
+
+NoMethodError (undefined method `^' for 4.5:Float):
+  app/models/trail.rb:41:in `calorie_counter'
+  app/controllers/trails_controller.rb:9:in `index'
+
+
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.0ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.8ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (45.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (48.8ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/nathanpark/.rbenv/versions/2.2.1/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (113.1ms)

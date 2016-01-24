@@ -4,7 +4,6 @@ class TrailsController < ApplicationController
   def index
     @trails = Trail.all
 
-
     if request.xhr?
       trail_data = Trail.find_by(name: params[:trailName])
       calories = Trail.calorie_counter(params[:weight], params[:pace], trail_data.distance, trail_data.elevation_gain)

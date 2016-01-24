@@ -26,6 +26,11 @@ class Trail < ActiveRecord::Base
   end
 
   def self.calorie_counter(weight, pace, dist, elev_gain)
+
+    weight = weight.to_f
+    pace = pace.to_f
+    dist = dist.to_f
+    elev_gain = elev_gain.to_f
     # weight is in lbs
     # pace is in miles per hour
     # distance in meters, converted to miles
@@ -33,7 +38,7 @@ class Trail < ActiveRecord::Base
 
     diff = (((((elev_gain/(dist*5280)*100)*4)+(Math.sqrt((dist*dist)*6))))/2.5);
     
-    calories = ((((weight * 2462.4)+44044)/(pace^1.0045))+(Math.sqrt(((diff^3)))));
+    calories = ((((weight * 2462.4)+44044)/(pace**1.0045))+(Math.sqrt(((diff^3)))));
 
     return calories
   end  
