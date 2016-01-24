@@ -40,7 +40,7 @@ class Trail < ActiveRecord::Base
     
     calories = ((((weight * 2462.4)+44044)/(pace**1.0045))+(Math.sqrt(((diff**3)))));
 
-    return calories
+    return calories.to_i
   end  
 
 end
