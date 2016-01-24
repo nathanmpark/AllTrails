@@ -1,18 +1,20 @@
-<%if flash[:error]%>
-  <%=flash[:error]%>
-<%else%>
-  <div id='trail'>Trail Distance: </div> 
-  <div><%=distance%> meters</div>
+<div class="partial">
+  <%if flash[:error]%>
+    <%=flash[:error]%>
+  <%else%>
+    <div id='trail'>Trail Distance: </div> 
+    <div><%=distance%> meters</div>
 
-  <div id='calories'>Total Calories Burned: </div>
-  <div><%=calories%> calories</div>
-  
-  <div id='hike-time'>Total Hiking Time: </div>
-  <div>
-    <%if time[:hours] == 0%>
-      <%=time[:min]%> minutes: <%=time[:sec]%> seconds</div>
-    <%else%>
-      <%=time[:hours]%> hours : <%=time[:min]%> minutes: <%=time[:sec]%> seconds
-    <%end%>
-  </div>
-<%end%>
+    <div id='calories'>Total Calories Burned: </div>
+    <div><%=calories%> calories</div>
+    
+    <div id='hike-time'>Total Hiking Time: </div>
+    <div>
+      <%if time[:hours] == 0%>
+        <%=time[:min]%> minutes: <%=time[:sec]%> seconds</div>
+      <%else%>
+        <%=time[:hours]%> hours : <%=time[:min]%> minutes: <%=time[:sec]%> seconds
+      <%end%>
+    </div>
+  <%end%>
+</div>
