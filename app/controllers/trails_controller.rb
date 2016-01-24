@@ -5,9 +5,15 @@ class TrailsController < ApplicationController
     @trails = Trail.all
 
     if request.xhr?
-      trail_data = Trail.find_by(name: params[:trailName])
-      calories = Trail.calorie_counter(params[:weight], params[:pace], trail_data.distance, trail_data.elevation_gain)
-      render 'trails/_calorieResults', locals: {calories: calories}, layout: false
+      if params[:pace] == "0" || params[:weight] == "0" || params[:trailName] == "Trails Dropdown"
+        flash[:error] = "Please select a trail, set hiking pace, and/or adjust weight"
+      else
+        trail_data = Trail.find_by(name: params[:trailName])
+        calories = Trail.calorie_counter(params[:weight], params[:pace], trail_data.distance, trail_data.elevation_gain)
+        time = Trail.hike_time(trail_data.distance, params[:pace])
+      end
+      
+      render 'trails/_calorieResults', locals: {calories: calories, time: time}, layout: false
     end
   end
   

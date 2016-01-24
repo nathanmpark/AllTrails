@@ -20,8 +20,6 @@ $(document).ready(function(){
   $(adjustWeightSlider)
   calculateCalories()
   $(selectDropDown)
-
-
 });
 
 var selectDropDown = function(){
