@@ -13,3 +13,54 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+    background-image: url("alltrails.jpg");
+}
+
+* {
+  /*border: 1px solid red;*/
+  font-family: 'Open Sans', sans-serif;
+}
+
+.slide-container {
+  background-color: white;
+  width: 75%;
+  margin: auto;
+  border: 2px solid teal;
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.brand-container{
+  width: 75%;
+  margin: auto;
+}
+
+#title {
+  margin-top: 0;
+}
+
+#pace {
+  border: 0; 
+  color: teal; 
+  font-weight: bold;
+}
+
+#weight {
+  border: 0; 
+  color: teal; 
+  font-weight: bold;
+}
+
+#calculate {
+  margin-top: 20px;
+  right: 0;
+}
+
+
+
+
+
+
+

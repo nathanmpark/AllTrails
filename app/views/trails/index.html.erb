@@ -1,39 +1,43 @@
-<h1>AllTrails</h1>
 
+<div class="container">
+  <div class="brand-container">
+    <%= image_tag("brand.jpg", :alt => "brand", class: "brand") %>
+  </div>
 
-<h1>Trails List</h1>
-<div class="dropdown">
-  <button class="btn btn-primary  " type="button" data-toggle="dropdown">Trails Dropdown
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <%@trails.each do |trail|%>
-      <li><a href="#"><%=trail.name%></a></li>
-    <%end%>
-  </ul>
+  <div class="slide-container">
+    <div class="trail-container">
+      <h1 id="title">Calorie Calculator</h1>
+      <div class="dropdown">
+        <button class="btn btn-primary  " type="button" data-toggle="dropdown">Select Trail
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <%@trails.each do |trail|%>
+            <li><a href="#"><%=trail.name%></a></li>
+          <%end%>
+        </ul>
+      </div>
+    </div>
+
+    <h3 id="center">Set Hiking Pace</h3>
+    <p>
+      <label for="pace">(0.5 mph increments):</label>
+      <input type="text" id="pace">
+    </p>
+    <div id="hikingslider"></div>
+
+    <h3>Adjust Weight</h3>
+    <p>
+      <label for="weight">(5 lbs increments):</label>
+      <input type="text" id="weight">
+    </p>
+    <div id="weightslider"></div>
+
+    <div class="calculator">
+      <%= form_for :trails, url: {action: "index"} do |f| %>
+        <%= f.submit "Calculate", id: "calculate", class: "btn btn-primary" %>
+      <% end %>
+      <div id="cal-container"></div>
+    </div>
+  </div>
+
 </div>
-
-<h1>Hiking Pace</h1>
-<p>
-  <label for="pace">Set Hiking Pace (0.5 mph increments):</label>
-  <input type="text" id="pace" style="border:0; color:#f6931f; font-weight:bold;">
-</p>
- 
-<div id="hikingslider"></div>
-
-<h1>Adjust Weight</h1>
-
-<p>
-  <label for="weight">Current Weight (5 lbs increments):</label>
-  <input type="text" id="weight" style="border:0; color:#f6931f; font-weight:bold;">
-</p>
- 
-<div id="weightslider"></div>
-
-<h1>Calorie Calculator</h1>
-
-<%= form_for :trails, url: {action: "index"} do |f| %>
-  <%= f.submit "Calculate", id: "calculate", class: "btn btn-primary" %>
-<% end %>
-
-<div id="cal-container"></div>
-

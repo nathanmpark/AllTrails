@@ -5,7 +5,7 @@ class TrailsController < ApplicationController
     @trails = Trail.all
 
     if request.xhr?
-      if params[:pace] == "0" || params[:weight] == "0" || params[:trailName] == "Trails Dropdown\n  "
+      if params[:pace] == "0" || params[:weight] == "0" || params[:trailName].include?("Select")
         flash[:error] = "Please select a trail, set hiking pace, and/or adjust weight"
       else
         trail_data = Trail.find_by(name: params[:trailName])
