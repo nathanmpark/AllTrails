@@ -2,14 +2,9 @@ class Trail < ActiveRecord::Base
   has_many :hikes
 
   def self.hike_time(dist, pace)
-    # distance is in meters
-    # pace is in miles per hour
-
-    # converts distance to miles
-    dist = dist*0.000621371
+    dist = dist*0.000621371 # converts distance to miles
 
     hours = dist/pace
-
     if hours % 1 == 0
       min = 0
     else
@@ -28,13 +23,9 @@ class Trail < ActiveRecord::Base
   def self.calorie_counter(weight, pace, dist, elev_gain)
 
     weight = weight.to_f
-    pace = pace.to_f
-    dist = dist.to_f
+    pace = (60/pace).to_f #converts pace from mph to min/mile
+    dist = (dist*0.000621371).to_f #converts dist from meters to miles
     elev_gain = elev_gain.to_f
-    # weight is in lbs
-    # pace is in miles per hour
-    # distance in meters, converted to miles
-    # elevation in meters, converted to miles
 
     diff = (((((elev_gain/(dist*5280)*100)*4)+(Math.sqrt((dist*dist)*6))))/2.5);
     
