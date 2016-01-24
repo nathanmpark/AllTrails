@@ -16,7 +16,69 @@
 
 
 $(document).ready(function(){
+  $(hikingPaceSlider)
+  $(adjustWeightSlider)
+  calculateCalories()
+  $(selectDropDown)
+
+
 });
+
+var selectDropDown = function(){
+  $(".dropdown-menu li a").click(function(){
+    $(".btn:first-child").text($(this).text());
+    $(".btn:first-child").val($(this).text());
+  });
+};
+
+var calculateCalories = function(){
+  $('#calculate').on('click', function(event){
+    event.preventDefault();
+
+    var trailName = $('.btn:first-child').text()
+    var pace = $('#pace').val()
+    var weight = $('#weight').val()
+
+    $.ajax({
+      type: 'GET',
+      url: '/trails',
+      data: {trailName: trailName, pace: pace, weight: weight}
+    })
+    .done(function(response){
+      $('#cal-container').html(response)
+    })
+    .fail(function(error){
+      console.log(error)
+    })
+
+  })
+}
+
+var hikingPaceSlider = function(){
+  $('#hikingslider').slider({
+    value:0,
+    min: 0,
+    max: 20,
+    step: 0.5,
+    slide: function( event, ui ) {
+      $('#pace').val(ui.value);
+    }
+  });
+  $('#pace').val($('#hikingslider').slider('value'));
+};
+
+var adjustWeightSlider = function(){
+  $('#weightslider').slider({
+    value:0,
+    min: 0,
+    max: 500,
+    step: 5,
+    slide: function( event, ui ) {
+      $('#weight').val(ui.value);
+    }
+  });
+  $('#weight').val($('#weightslider').slider('value'));
+};
 
 var loadTrails = function(){
   $.each([10035772, 10029035, 10207801, 10033941, 10034022], function(index, trail_id){
@@ -53,10 +115,6 @@ var trailData = function(trail_obj){
 };
 
 loadTrails();
-
-
-
-
 
 
 
