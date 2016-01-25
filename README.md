@@ -25,6 +25,8 @@ http://all-trails.herokuapp.com
 
 1. git clone https://github.com/nathanmpark/AllTrails.git
 2. cd AllTrails
-2. bundle install
-3. rails server 
-4. http://localhost:3000/
+3. bundle install
+4. rake db:create
+5. rake db:migrate
+6. rails server 
+7. http://localhost:3000/
