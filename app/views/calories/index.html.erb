@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="brand-container">
+    <%= image_tag("brand.jpg", :alt => "brand", class: "brand") %>
+  </div>
+
+  <div class="slide-container">
+    <div class="trail-container">
+      <h1 id="title">Calorie Calculator</h1>
+      <div class="dropdown">
+        <button class="btn btn-primary  " type="button" data-toggle="dropdown">Select Trail
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <%@trails.each do |trail|%>
+            <li><a href="#"><%=trail.name%></a></li>
+          <%end%>
+        </ul>
+      </div>
+    </div>
+
+    <div clas="sliders">
+      <h3 id="center">Set Hiking Pace</h3>
+      <p>
+        <label for="pace">(0.5 mph increments):</label>
+        <input type="text" id="pace">
+      </p>
+      <div id="hikingslider"></div>
+
+      <h3>Adjust Weight</h3>
+      <p>
+        <label for="weight">(5 lbs increments):</label>
+        <input type="text" id="weight">
+      </p>
+      <div id="weightslider"></div>
+    </div>
+
+    <button type="button" id="calculate" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Calculate</button>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Calorie Stats</h4>
+          </div>
+          <div class="modal-body">
+            <div id="cal-container"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

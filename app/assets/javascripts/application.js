@@ -39,7 +39,7 @@ var calculateCalories = function(){
 
     $.ajax({
       type: 'GET',
-      url: '/trails',
+      url: '/calories',
       data: {trailName: trailName, pace: pace, weight: weight},
       dataType: 'html'
     })
