@@ -9,7 +9,7 @@ The Calorie Calculator is a web application that can estimate calories burned ba
 
 # Heroku App Link
 
-http://all-trails.herokuapp.com
+http://cc-nathan.herokuapp.com
 
 # Tech
 
@@ -23,8 +23,8 @@ http://all-trails.herokuapp.com
 
 # Deployment in command line
 
-1. git clone https://github.com/nathanmpark/AllTrails.git
-2. cd AllTrails
+1. git clone https://github.com/nathanmpark/CalorieCalculator.git
+2. cd CalorieCalculator
 3. bundle install
 4. rake db:create
 5. rake db:migrate
