@@ -15,6 +15,7 @@ http://cc-nathan.herokuapp.com
 
 * Ruby on Rails
 * PostgreSQL
+* jQuery
 * HTML5
 * CSS3
 * AllTrails API
